@@ -11,6 +11,12 @@ Visit [TBD](#description)
 
 ## Teck Stack
 
+* ReactJS
+* Webpack
+* HTML SCSS
+* AWS Lambada
+* ASP.NET core
+
 ## Features
 
 
