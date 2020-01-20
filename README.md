@@ -1,6 +1,6 @@
 # SC-Housekeeper
 
 ## Table of contents
-*[Description] 
+*[Description](#description) 
 
 ## Description
