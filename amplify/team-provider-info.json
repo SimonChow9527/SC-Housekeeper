@@ -1,0 +1,15 @@
+{
+    "production": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-sc-housekeeper-production-155958-authRole",
+            "UnauthRoleArn": "arn:aws:iam::494960398407:role/amplify-sc-housekeeper-production-155958-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::494960398407:role/amplify-sc-housekeeper-production-155958-authRole",
+            "Region": "ap-southeast-2",
+            "DeploymentBucketName": "amplify-sc-housekeeper-production-155958-deployment",
+            "UnauthRoleName": "amplify-sc-housekeeper-production-155958-unauthRole",
+            "StackName": "amplify-sc-housekeeper-production-155958",
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:494960398407:stack/amplify-sc-housekeeper-production-155958/0a8122f0-3cd4-11ea-9f6d-066f346b367c",
+            "AmplifyAppId": "d3jyyyjyic8ggl"
+        }
+    }
+}
