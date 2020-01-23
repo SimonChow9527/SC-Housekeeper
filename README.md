@@ -12,11 +12,12 @@ Visit [TBD](#description)
 ## Teck Stack
 
 * ReactJS
-* Webpack? Bable?
+* React-Redux
+* ~~Webpack Bable~~
 * HTML5 SCSS JavaScript (ES6)
-* Jest or Enzyme (TBD)
-* AWS Lambada
-* ASP.NET core
+* Enzyme/Jest 
+* GraphQL AWS AppSync
+
 
 ## Features
 
