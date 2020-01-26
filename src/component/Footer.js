@@ -17,10 +17,10 @@ const contactLink = () => {
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="footer-copyright">
+      <span className="footer-copyright">
         @{currentYear()} copywrite-simon chow. All rights reserved
-      </div>
-      <div className="footer-contact">Contact me: visit {contactLink()}</div>
+      </span>
+      <span className="footer-contact">Contact me: visit {contactLink()}</span>
     </div>
   );
 };

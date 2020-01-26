@@ -1,3 +1,4 @@
+@import '../src//styles/Colors.scss';
 html, body{
   min-height:100%;
   font-family: 'Quicksand', sans-serif;
@@ -18,7 +19,7 @@ body{height:100vh;
   position: relative;
   height: 100%;
   width: 100%;
-
+  background-color:$white;
 }
 
 
