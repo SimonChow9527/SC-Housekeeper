@@ -15,8 +15,9 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 * React-Redux
 * ~~Webpack Bable~~
 * HTML5 SCSS JavaScript (ES6)
-* Enzyme/Jest 
-* GraphQL AWS AppSync
+* Enzyme/Jest for testing
+* AWS AppSync + GraphQL API
+* Amazon Cognito for user management
 
 
 ## Features
