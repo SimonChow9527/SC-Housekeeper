@@ -1,0 +1,27 @@
+@import'./Colors.scss';
+
+//utility/mybutton
+/////////////////////////////////////////////////////////////////
+.my-button{
+    background-color: $grey2; 
+    border: none;
+    text-align: center;
+    color: $white;
+    height: 30px;
+    width: 50px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.my-button:hover {
+    background-color:$yellow;
+    color:$white;
+    cursor: pointer;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+.my-button:focus {
+    outline:0;
+  }
+/////////////////////////////////////////////////////////////////

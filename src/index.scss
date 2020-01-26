@@ -1,0 +1,25 @@
+@import '../src//styles/Colors.scss';
+html, body{
+  min-height:100%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+ 
+}
+body{height:100vh;
+  margin: 0;
+}
+#root{
+    height:100%;
+    widows: 100%;
+}
+
+.App {
+  position: relative;
+  text-align: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color:$white;
+}
+
+

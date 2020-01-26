@@ -1,6 +1,6 @@
 # SC-Housekeeper
 
-Visit [TBD](#description)
+Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 
 ## Table of contents
 * [Description](#description) 
@@ -12,11 +12,13 @@ Visit [TBD](#description)
 ## Teck Stack
 
 * ReactJS
-* Webpack? Bable?
+* React-Redux
+* ~~Webpack Bable~~
 * HTML5 SCSS JavaScript (ES6)
-* Jest or Enzyme (TBD)
-* AWS Lambada
-* ASP.NET core
+* Enzyme/Jest for testing
+* AWS AppSync + GraphQL API
+* Amazon Cognito for user management
+
 
 ## Features
 
