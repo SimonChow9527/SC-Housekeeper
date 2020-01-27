@@ -4,11 +4,13 @@
     position: relative;
     height: 100%;
     width: 100%;
-    
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
 }
 .forms{
     position: relative;
-    height: 30%;
+    height: 50%;
     width: 30%;
     left: 10%;
     top: 25%;
@@ -19,5 +21,25 @@
 }
 
 .hide {
-    display: none;
+    display: none !important;
+}
+.register-btn{
+    border: none;
+}
+.register-btn:hover{
+    background-color:$yellow !important;
+    border: none;
+    color:$white !important;
+    cursor: pointer;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.register-btn:focus{
+    background-color:$yellow !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+.register-btn-isSelected{
+    background-color:$yellow !important;
+    box-shadow: none !important;
+    border: none !important;
 }
