@@ -16,7 +16,8 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 * ~~Webpack Bable~~
 * HTML5 SCSS JavaScript (ES6)
 * Enzyme/Jest for testing
-* AWS AppSync + GraphQL API
+* ~~AWS AppSync + GraphQL API~~
+* RESFful API + axios
 * Amazon Cognito for user management
 
 
