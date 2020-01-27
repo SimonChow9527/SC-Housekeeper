@@ -1,0 +1,21 @@
+@import './Colors.scss';
+.searchbar-wrapper{
+    position: relative;
+    height: 60%;
+    width: 60%;
+    top:20%;
+    left:20%;
+}
+
+.searchbar-wrapper .desc{
+    position: relative;
+    top: 10%;
+    color: $grey3;
+    font-size: xx-large !important;
+}
+
+.searchbar-wrapper .searchbar{
+    position: relative;
+    top:15%;
+    outline: 1px solid $grey3;
+}

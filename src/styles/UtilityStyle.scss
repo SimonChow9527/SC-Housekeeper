@@ -3,25 +3,42 @@
 //utility/mybutton
 /////////////////////////////////////////////////////////////////
 .my-button{
-    background-color: $grey2; 
+    background-color: $grey3; 
     border: none;
     text-align: center;
     color: $white;
     height: 30px;
-    width: 50px;
-    border-radius: 8px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    width: auto;
+    border-radius: .25rem;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
 }
-
 .my-button:hover {
     background-color:$yellow;
     color:$white;
     cursor: pointer;
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   }
-
 .my-button:focus {
     outline:0;
   }
+.my-button:active {
+    cursor: progress;
+  }
 /////////////////////////////////////////////////////////////////
+
+////////////////////////input tag///////////////////////////////
+.my-input{
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  border: 1px solid #ced4da;
+  border-radius: 1rem;
+  outline: none;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.my-input:focus{
+  border: 1px solid $yellow;
+}
+/////////////////////////////////////////////////////////////////////
