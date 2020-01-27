@@ -5,7 +5,13 @@ import "../styles/NavStyle.scss";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <MyButton text="Login" path="/login" />
+      <MyButton
+        text="Login"
+        path="/login"
+        handleClick={() => {
+          console.log("no");
+        }}
+      />
     </div>
   );
 };

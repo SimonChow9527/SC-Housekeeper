@@ -1,0 +1,23 @@
+@import "./Colors.scss";
+@import "./UtilityStyle.scss";
+.register-wrapper{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    
+}
+.forms{
+    position: relative;
+    height: 30%;
+    width: 30%;
+    left: 10%;
+    top: 25%;
+}
+
+.forms label{
+    display: block;
+}
+
+.hide {
+    display: none;
+}
