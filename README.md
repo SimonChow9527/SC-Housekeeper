@@ -18,6 +18,7 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 * Enzyme/Jest for testing
 * ~~AWS AppSync + GraphQL API~~
 * RESFful API + axios
+* Redux-thunk
 * Amazon Cognito for user management
 
 

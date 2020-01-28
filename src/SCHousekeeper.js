@@ -14,7 +14,7 @@ function SCHousekeeper() {
         <Navbar />
 
         <Switch>
-          <Route exact path="/itemdetail" component={ItemDetail} />
+          <Route exact path="/itemdetail/:id" component={ItemDetail} />
           <Route exact path="/login" component={Register} />
           <Route exact path="/" component={Searchbar} />
         </Switch>
