@@ -1,111 +1,143 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "../styles/RegisterStyle.scss";
 import MyButton from "./utility/MyButton.js";
-import classNames from "classnames";
+import * as actionCreators from "../actions/actionCreators";
+import { connect } from "react-redux";
 
-const Register = () => {
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [isRegister, setIsRegister] = useState(false);
+class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userEmail: "",
+      userName: "",
+      userPassword: "",
+      isRegister: false
+    };
 
-  let registerButtonClass = classNames({
-    btn: true,
-    "btn-secondary": true,
-    "register-btn": true,
-    "register-btn-isSelected": isRegister
-  });
-  let signinButtonClass = classNames({
-    btn: true,
-    "btn-secondary": true,
-    "register-btn": true,
-    "register-btn-isSelected": !isRegister
-  });
+    this.cssClassNameHelper = this.cssClassNameHelper.bind(this);
+    this.changeRegisterForm = this.changeRegisterForm.bind(this);
+  }
 
-  let usernameInputClass = classNames({
-    "my-input": true,
-    hide: !isRegister
-  });
-  let usernameLabelClass = classNames({
-    hide: !isRegister
-  });
+  changeRegisterForm() {
+    //change button color
+    let registerbtn = document.getElementById("register-btn");
+    let signinbtn = document.getElementById("signin-btn");
+    this.cssClassNameHelper(registerbtn, "register-btn-isSelected");
+    this.cssClassNameHelper(signinbtn, "register-btn-isSelected");
+    // don't require username for login
+    let usernameinput = document.getElementById("username");
+    this.cssClassNameHelper(usernameinput, "hide");
+    let usernamelabel = document.getElementById("usernamelable");
+    this.cssClassNameHelper(usernamelabel, "hide");
+    // no need to show email prompt when login
+    let emailhelp = document.getElementById("emailHelp");
+    this.cssClassNameHelper(emailhelp, "hide");
+  }
 
-  let emailSmallClass = classNames({
-    "form-text": true,
-    "text-muted": true,
-    hide: !isRegister
-  });
+  cssClassNameHelper(element, className) {
+    if (element.classList.contains(className)) {
+      element.classList.remove(className);
+    } else {
+      element.classList.add(className);
+    }
+  }
 
-  return (
-    <div className="register-wrapper">
-      <div className="forms">
-        <div
-          className="btn-group"
-          role="group"
-          aria-label="register or sign in"
-        >
-          <button
-            type="button"
-            className={registerButtonClass}
-            onClick={() => setIsRegister(!isRegister)}
+  render() {
+    return (
+      <div className="register-wrapper">
+        <div className="forms">
+          <div
+            className="btn-group"
+            role="group"
+            aria-label="register or sign in"
           >
-            Register
-          </button>
-          <button
-            type="button"
-            className={signinButtonClass}
-            onClick={() => setIsRegister(!isRegister)}
-          >
-            Sign in
-          </button>
+            <button
+              type="button"
+              id="signin-btn"
+              className="btn btn-secondary register-btn register-btn-isSelected"
+              onClick={() => {
+                this.setState({ isRegister: true });
+                this.changeRegisterForm();
+              }}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              id="register-btn"
+              className="btn btn-secondary register-btn "
+              onClick={() => {
+                this.setState({ isRegister: false });
+                this.changeRegisterForm();
+              }}
+            >
+              Register
+            </button>
+          </div>
+          <br />
+          <br />
+          <label htmlFor="Email">Email address</label>
+          <input
+            type="email"
+            id="Email"
+            className="my-input"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            onChange={e =>
+              this.setState({
+                userEmail: e.target.value
+              })
+            }
+          />
+          <small id="emailHelp" className="hide">
+            please enter a valid email.
+          </small>
+
+          <label id="usernamelable" htmlFor="username" className="hide">
+            User Name
+          </label>
+          <input
+            type="text"
+            id="username"
+            className="my-input hide"
+            placeholder="Enter a user name that you like"
+            onChange={e =>
+              this.setState({
+                userName: e.target.value
+              })
+            }
+          />
+          <br />
+          <label htmlFor="Password">Password</label>
+          <input
+            type="password"
+            id="Password"
+            className="my-input"
+            placeholder="Password"
+            onChange={e =>
+              this.setState({
+                userPassword: e.target.value
+              })
+            }
+          />
+          <br />
+          <MyButton text="Submit" handleClick={() => {}} />
+          <MyButton
+            text="Log in as guest"
+            handleClick={() => {
+              this.props.userLoggedIn(true);
+            }}
+          />
         </div>
-        <br />
-        <br />
-        <label htmlFor="Email">Email address</label>
-        <input
-          type="email"
-          id="Email"
-          className="my-input"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          onChange={e => setUserEmail(e.target.value)}
-        />
-        <small id="emailHelp" className={emailSmallClass}>
-          please enter a valid email.
-        </small>
-
-        <label htmlFor="username" className={usernameLabelClass}>
-          User Name
-        </label>
-        <input
-          type="text"
-          id="username"
-          className={usernameInputClass}
-          placeholder="Enter a user name that you like"
-          onChange={e => setUserName(e.target.value)}
-        />
-        <br />
-        <label htmlFor="Password">Password</label>
-        <input
-          type="password"
-          id="Password"
-          className="my-input"
-          placeholder="Password"
-          value={userPassword}
-          onChange={e => setUserPassword(e.target.value)}
-        />
-        <br />
-        <MyButton
-          text="Submit"
-          handleClick={() => {
-            console.log({ userEmail });
-            console.log({ userPassword });
-            console.log({ isRegister });
-          }}
-        />
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    userLoggedIn: data => dispatch(actionCreators.userLoggedIn(data))
+  };
 };
 
-export default Register;
+export default connect(null, mapDispatchToProps)(Register);
