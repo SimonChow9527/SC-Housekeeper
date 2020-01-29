@@ -25,5 +25,5 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 ## Features
 
 ## Difficulties
-*debouncing
+* debouncing
 
