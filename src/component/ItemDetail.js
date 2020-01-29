@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../styles/ItemDetailStyle.scss";
 import { connect } from "react-redux";
+import MySlider from "../component/utility/MySlider.js";
+import MyInput from "../component/utility/MyInput.js";
 
 class ItemDetail extends Component {
   render() {
@@ -8,7 +10,19 @@ class ItemDetail extends Component {
       this.props.history.push("/");
       return null;
     } else {
-      return <div className="item-detail-wrapper">{this.props.item.title}</div>;
+      return (
+        <div className="item-detail-wrapper">
+          <MySlider name="Usage" defaultValue="20" onChange={value => {}} />
+          <MyInput
+            name="itemName"
+            id="itemName"
+            placeholder=" enter name"
+            onChange={e => {
+              console.log(e);
+            }}
+          />
+        </div>
+      );
     }
   }
 }
