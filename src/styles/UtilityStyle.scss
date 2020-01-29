@@ -1,7 +1,7 @@
 @import'./Colors.scss';
 
-//utility/mybutton
-/////////////////////////////////////////////////////////////////
+//mybutton
+
 .my-button{
     background-color: $grey3; 
     border: none;
@@ -25,9 +25,9 @@
 .my-button:active {
     cursor: progress;
   }
-/////////////////////////////////////////////////////////////////
 
-////////////////////////input tag///////////////////////////////
+
+//input tag
 .my-input{
   display: block;
   width: 100%;
@@ -41,4 +41,84 @@
 .my-input:focus{
   border: 1px solid $yellow;
 }
-/////////////////////////////////////////////////////////////////////
+
+//input with span
+.input-wrapper{
+  position: relative;
+  width: 90%;
+  float: left;
+  height: 40px;
+  text-align: center;
+}
+.input-text{
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 100% !important;
+  line-height: 40px;
+}
+
+.input-input{
+  position: relative;
+  width: 50% !important;
+}
+
+
+
+//slider
+
+.slider-wrapper{
+  position: relative;
+  width: 90%;
+  float: left;
+}
+.slider-text{
+  float: left;
+  text-align: center;
+  width: 25%;
+}
+
+.rc-slider{
+  position: relative;
+  width: 70% !important;
+  left: 25%;
+}
+.rc-slider-rail{
+  background-color: $grey !important;
+  height: 15px !important;
+  border-radius: 0.5 !important;
+  background-image:
+  linear-gradient(45deg,
+  rgba(255,255,255,.15) 25%,
+  transparent 25%,
+  transparent 50%,
+  rgba(255,255,255,.15) 50%,
+  rgba(255,255,255,.15) 75%,
+  transparent 75%,
+  transparent);
+background-size: 1rem 1rem;
+}
+.rc-slider-track{
+  border-radius: 0.5!important;
+  height: 15px !important;
+  background-image:
+    linear-gradient(45deg,
+    rgba(255,255,255,.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255,255,255,.15) 50%,
+    rgba(255,255,255,.15) 75%,
+    transparent 75%,
+    transparent);
+  background-size: 1rem 1rem;
+}
+.rc-slider-handle{
+  border-color: $my-black !important;
+  height: 25px !important;
+  width: 15px !important;
+  margin-left: 0px !important;
+  margin-top: -5px !important;
+  background-color: $slider-rail-white !important;
+  border-radius: 5px !important;
+}
+
