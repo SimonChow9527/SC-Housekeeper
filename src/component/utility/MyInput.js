@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 const MyInput = props => {
   return (
     <div className="input-wrapper">
-      <div className="input-text">{props.name + " : "}</div>
+      <label className="input-text" htmlFor={props.inputID}>
+        {props.name + " : "}
+      </label>
       <input
         type="text"
         id={props.inputID}
@@ -20,7 +22,7 @@ const MyInput = props => {
 
 MyInput.propTypes = {
   name: PropTypes.string,
-  id: PropTypes.string,
+  inputID: PropTypes.string,
   onChange: PropTypes.func
 };
 export default MyInput;
