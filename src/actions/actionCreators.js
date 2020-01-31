@@ -6,3 +6,11 @@ export function userLoggedIn(userLoggedIn) {
     USERLOGGEDIN: userLoggedIn
   };
 }
+
+export function loadItems() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: actionTypes.LOAD_ITEM
+    });
+  };
+}

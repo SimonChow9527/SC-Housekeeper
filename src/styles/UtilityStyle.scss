@@ -26,7 +26,18 @@
     cursor: progress;
   }
 
-
+.btn-custom-red{
+    background-color:$bootstrap-red;
+}
+.btn-custom-green{
+    background-color:$bootstrap-green;
+}
+.btn-custom-red:hover{
+  background-color:$bootstrap-red;
+}
+.btn-custom-green:hover{
+  background-color:$bootstrap-green;
+}
 //input tag
 .my-input{
   display: block;
@@ -45,22 +56,15 @@
 //input with span
 .input-wrapper{
   position: relative;
-  width: 90%;
-  float: left;
-  height: 40px;
+  width: 100%;
+  height: 100%;
   text-align: center;
-}
-.input-text{
-  position: relative;
-  float: left;
-  width: 50%;
-  height: 100% !important;
-  line-height: 40px;
+  margin: 0;
 }
 
 .input-input{
   position: relative;
-  width: 50% !important;
+  width: 100% !important;
 }
 
 

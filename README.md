@@ -13,12 +13,11 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 
 * ReactJS
 * React-Redux
-* ~~Webpack Bable~~
+* ~~Webpack Bable~~ maybe later
 * HTML5 SCSS JavaScript (ES6)
-* Enzyme/Jest for testing
-* ~~AWS AppSync + GraphQL API~~
-* RESFful API + axios
-* Redux-thunk
+* Enzyme/Jest -> testing
+* ~~AWS AppSync + GraphQL API~~  nah
+* RESFful API + axios + Redux-thunk
 * Amazon Cognito for user management
 
 
