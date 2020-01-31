@@ -12,9 +12,8 @@ const MyInput = props => {
         id={props.inputID}
         className="my-input input-input"
         placeholder={props.placeholder}
-        onChange={e => {
-          props.onChange(e.target.value);
-        }}
+        onChange={props.onChange}
+        value={props.value}
       />
     </div>
   );
