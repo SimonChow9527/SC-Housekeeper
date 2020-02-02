@@ -4,6 +4,7 @@ import Footer from "./component/Footer.js";
 import Register from "./component/Register.js";
 import Searchbar from "./component/Searchbar.js";
 import ItemDetail from "./component/ItemDetail.js";
+import ItemList from "./component/ItemList.js";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./styles/HomepageStyle.scss";
 
@@ -15,6 +16,7 @@ function SCHousekeeper() {
 
         <Switch>
           <Route exact path="/itemdetail/:id" component={ItemDetail} />
+          <Route exact path="/itemlist" component={ItemList} />
           <Route exact path="/login" component={Register} />
           <Route exact path="/" component={Searchbar} />
         </Switch>
