@@ -205,8 +205,18 @@ class ItemDetail extends Component {
           }}
         />
       );
+      let cancelBtn = (
+        <MyButton
+          text="X"
+          extraclassname="btn-custom-red btn-cancel"
+          handleClick={() => {
+            this.props.history.goBack();
+          }}
+        />
+      );
       return (
         <div className="item-detail-wrapper">
+          {cancelBtn}
           <div className="container">
             <div className="row">
               <div className="col-4">{itemName}</div>

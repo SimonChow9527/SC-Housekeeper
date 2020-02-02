@@ -12,16 +12,33 @@ class ItemList extends Component {
     };
   }
   render() {
-    let listItem = this.props.items.map(i => (
-      <li
-        key={i.id}
-        onClick={e => {
-          this.props.history.push("/itemdetail/" + i.id);
-        }}
-      >
-        {<ItemCard item={i} />}
-      </li>
-    ));
+    let listItem = this.props.items
+      .filter(i => {
+        return (
+          this.state.searchString === " " ||
+          i.Name.toLowerCase().indexOf(this.state.searchString.toLowerCase()) >=
+            0 ||
+          i.Brand.toLowerCase().indexOf(
+            this.state.searchString.toLowerCase()
+          ) >= 0 ||
+          i.Flavor.toLowerCase().indexOf(
+            this.state.searchString.toLowerCase()
+          ) >= 0 ||
+          i.Category.toLowerCase().indexOf(
+            this.state.searchString.toLowerCase()
+          ) >= 0
+        );
+      })
+      .map(i => (
+        <li
+          key={i.id}
+          onClick={e => {
+            this.props.history.push("/itemdetail/" + i.id);
+          }}
+        >
+          {<ItemCard item={i} />}
+        </li>
+      ));
     return (
       <div className="item-list-wrapper">
         <div className="item-searchbar">
@@ -29,14 +46,9 @@ class ItemList extends Component {
             placeholder="search my pantry"
             className="my-input input-input"
             onChange={e => {
-              this.setState(
-                {
-                  searchString: e.target.value
-                },
-                () => {
-                  console.log(this.state.searchString);
-                }
-              );
+              this.setState({
+                searchString: e.target.value
+              });
             }}
           />
         </div>
