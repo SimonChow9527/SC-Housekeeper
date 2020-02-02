@@ -50,7 +50,7 @@ class MySlider extends Component {
       : this.calColor(this.state.sliderValue).toString();
     return (
       <div className="slider-wrapper">
-        <span className="slider-text">{this.props.name + ": "}</span>
+        <span className="slider-text">{this.props.name + " "}</span>
         <SliderWithTooltip
           tipFormatter={value => this.percentFormatter(value)}
           tipProps={{ overlayClassName: "foo" }}

@@ -1,0 +1,59 @@
+@import "./Colors.scss";
+.item-list-wrapper{
+    position: relative;
+    margin: 0;
+    height: 70%;
+    width: 80%;
+    top:15%;
+    left:10%;
+    background-color: $white;
+  
+}
+.item-list{
+    position: relative;
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+
+}
+.item-list-wrapper li{
+    list-style-type: none;
+}
+.item-searchbar{
+    position: relative;
+    height: 10%;
+}
+.item-card-wrapper{
+    height: 120px;
+    width: 500px;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-color: $yellow;
+    border-width: 1px;
+    background-color: $white;
+    margin:5px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
+
+.item-card-wrapper:hover{
+    cursor: pointer;
+    border:none;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.item-card-wrapper .container{
+    align-items: start;
+    text-align: start;
+    justify-content: center;
+    height: 100%;
+}
+
+.item-card-wrapper .container .row{
+    height:40px;
+    padding: 1%;
+}
+.item-card-wrapper hr{
+    margin: 0;
+}

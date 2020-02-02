@@ -25,6 +25,7 @@ class Navbar extends Component {
             path="/itemdetail/2"
             handleClick={() => {}}
           />
+          <MyButton text="testList" path="/itemlist" handleClick={() => {}} />
         </div>
         <div className="navbar-icon">
           <MyButton text="Login" path="/login" handleClick={() => {}} />
