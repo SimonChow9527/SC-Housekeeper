@@ -11,7 +11,12 @@
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   
 }
-
+.btn-cancel{
+  position: absolute;
+   top:0%;
+  right:0%;
+  z-index: 2;
+}
 .container{
     align-items: start;
     text-align: start;
@@ -33,6 +38,7 @@
     position: relative;
     margin-left: 10%;
 }
+
 
 .category-wrapper{
     position: relative;
