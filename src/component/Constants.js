@@ -3,5 +3,5 @@ export const Category = {
   Medicine: "Medicine",
   Bathroom: "Bathroom",
   General: "General",
-  Default: "Default"
+  Default: "Default" // in item detail page "choose..."
 };
