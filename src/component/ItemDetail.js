@@ -249,10 +249,10 @@ class ItemDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let id = parseInt(ownProps.match.params.id);
+  let id = parseInt(ownProps.match.params.ID);
 
   return {
-    item: state.itemReducer.items.find(item => item.id === id)
+    item: state.itemReducer.items.find(item => item.ID === id)
   };
 };
 

@@ -1,0 +1,20 @@
+@import './Colors.scss';
+.homepage-wrapper{
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+}
+
+.homepage-wrapper .desc{
+    position: relative;
+    top: 10%;
+    color: $grey3;
+    font-size: xx-large !important;
+}
+
+.homepage-wrapper .searchbar{
+    position: relative;
+    top:15%;
+    outline: 1px solid $grey3;
+}

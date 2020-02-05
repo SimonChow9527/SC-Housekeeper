@@ -7,8 +7,12 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/rootReducer";
 import thunk from "redux-thunk";
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
+
+Amplify.configure(awsconfig);
 
 ReactDOM.render(
   <Provider store={store}>

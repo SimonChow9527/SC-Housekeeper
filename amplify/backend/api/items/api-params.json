@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "itemsfunction",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "items",
+    "apiName": "items",
+    "functionArns": [
+        {
+            "lambdaFunction": "itemsfunction"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-sc-housekeeper-production-155958-authRole",
+        "unAuthRoleName": "amplify-sc-housekeeper-production-155958-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "itemsfunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "e186e656"
+}
