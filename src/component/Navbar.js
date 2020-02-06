@@ -16,11 +16,6 @@ class Navbar extends Component {
         </div>
         <div className="navbar-test">
           <MyButton
-            text={this.props.userLoggedIn.toString()}
-            path="/"
-            handleClick={() => {}}
-          />
-          <MyButton
             text="testItem"
             path="/itemdetail/2"
             handleClick={() => {}}

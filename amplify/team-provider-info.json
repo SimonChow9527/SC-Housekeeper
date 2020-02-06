@@ -10,6 +10,11 @@
             "StackName": "amplify-sc-housekeeper-production-155958",
             "StackId": "arn:aws:cloudformation:ap-southeast-2:494960398407:stack/amplify-sc-housekeeper-production-155958/0a8122f0-3cd4-11ea-9f6d-066f346b367c",
             "AmplifyAppId": "d3jyyyjyic8ggl"
+        },
+        "categories": {
+            "auth": {
+                "schousekeeper4e77cf62": {}
+            }
         }
     }
 }

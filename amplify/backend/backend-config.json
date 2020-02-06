@@ -28,7 +28,13 @@
 			"providerPlugin": "awscloudformation"
 		}
 	},
-	"auth": {},
+	"auth": {
+		"schousekeeper4e77cf62": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
 	"api": {
 		"items": {
 			"service": "API Gateway",
