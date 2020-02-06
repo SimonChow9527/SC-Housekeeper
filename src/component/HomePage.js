@@ -14,9 +14,9 @@ class HomePage extends Component {
           UserID: "userid"
         }
       };
-      API.del("items", "/items/object/8/userid", myInit).then(res => {
+      /*API.del("items", "/items/object/8/userid", myInit).then(res => {
         console.log(res);
-      });
+      });*/
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +29,9 @@ class HomePage extends Component {
         ) : (
           <div className="desc">
             Hey, your personal pantry guru is here <br />
-            please login{" "}
+            please sign in
+            <br />
+            (Or sign in as our dummy user Andy to take a tour )
           </div>
         )}
       </div>
