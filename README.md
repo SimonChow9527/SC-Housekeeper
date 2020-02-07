@@ -17,7 +17,7 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 * HTML5 SCSS JavaScript (ES6)
 * Enzyme/Jest -> testing
 * ~~AWS AppSync + GraphQL API~~  nah
-* RESFful API + Redux-thunk
+* AWS Lambda + Redux-thunk
 * Amazon Cognito for user management
 * DynamoDB for storage 
 
