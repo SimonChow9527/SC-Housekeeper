@@ -4,6 +4,7 @@ import MyButton from "./utility/MyButton.js";
 import * as actionCreators from "../actions/actionCreators";
 import { connect } from "react-redux";
 import { Auth } from "aws-amplify";
+import { toast } from "react-toastify";
 
 class Authenticator extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Authenticator extends Component {
       userEmail: "",
       userPassword: "",
       userRepeatPassword: "",
+      CognitoUsername: "",
       isRegister: false
     };
 
@@ -29,19 +31,42 @@ class Authenticator extends Component {
     let username = this.state.userEmail;
     let password = this.state.userPassword;
     let email = this.state.userEmail;
-    await Auth.signUp({
-      username,
-      password,
-      attributes: {
-        email: email,
-        name: username
-      }
-    })
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email: email,
+          name: username
+        }
+      });
+    } catch (err) {
+      toast.error(err.message);
+      return;
+    }
+
+    toast.success("Welcome! you have successfully registered a new account");
+    toast.success(
+      "And don't forget to check your email to confirm your email address"
+    );
   }
 
-  handleSignin() {}
+  async handleSignin() {
+    let username = this.state.userEmail;
+    let password = this.state.userPassword;
+    try {
+      await Auth.signIn(username, password).then(data =>
+        this.setState({
+          CognitoUser: data
+        })
+      );
+    } catch (err) {
+      toast.error(err.message);
+      return;
+    }
+    this.props.userAuthenticator(true);
+    this.props.setUser(this.state.CognitoUser);
+  }
 
   render() {
     let userRepeatPassword = this.state.isRegister ? (
@@ -56,20 +81,44 @@ class Authenticator extends Component {
               userRepeatPassword: e.target.value
             },
             () => {
-              if (this.state.userPassword !== this.state.userRepeatPassword) {
-                document.getElementById("submitBtn").disabled = true;
-                document.getElementById("submitBtn").classList.add("ban-hover");
-                document
-                  .getElementById("repeatPasswordtip")
-                  .classList.remove("hide");
-              } else {
-                document.getElementById("submitBtn").disabled = false;
-                document
-                  .getElementById("submitBtn")
-                  .classList.remove("ban-hover");
-                document
-                  .getElementById("repeatPasswordtip")
-                  .classList.add("hide");
+              if (this.state.isRegister) {
+                // confirm password not match
+                if (this.state.userPassword !== this.state.userRepeatPassword) {
+                  document.getElementById("submitBtn").disabled = true;
+                  document
+                    .getElementById("submitBtn")
+                    .classList.add("ban-hover");
+                  document
+                    .getElementById("repeatPasswordtip")
+                    .classList.remove("hide");
+                } else {
+                  document
+                    .getElementById("repeatPasswordtip")
+                    .classList.add("hide");
+                }
+                if (this.state.userPassword.length < 6) {
+                  //password length not correct
+                  document.getElementById("submitBtn").disabled = true;
+                  document
+                    .getElementById("submitBtn")
+                    .classList.add("ban-hover");
+                  document
+                    .getElementById("repeatPasswordtip2")
+                    .classList.remove("hide");
+                } else {
+                  document
+                    .getElementById("repeatPasswordtip2")
+                    .classList.add("hide");
+                }
+                if (
+                  this.state.userPassword === this.state.userRepeatPassword &&
+                  this.state.userPassword.length >= 6
+                ) {
+                  document.getElementById("submitBtn").disabled = false;
+                  document
+                    .getElementById("submitBtn")
+                    .classList.remove("ban-hover");
+                }
               }
             }
           )
@@ -85,9 +134,21 @@ class Authenticator extends Component {
     );
     let userRepeatPasswordTip = (
       <small id="repeatPasswordtip" className="repeatPasswordtip hide">
-        Password doesn't match
+        Password doesn't match <br />
       </small>
     );
+    let userRepeatPasswordTip2 = (
+      <small id="repeatPasswordtip2" className="repeatPasswordtip hide">
+        Password length not correct (minimum 6)
+      </small>
+    );
+
+    let passwordlabel = this.state.isRegister ? (
+      <label htmlFor="Password">Password (min length 6) </label>
+    ) : (
+      <label htmlFor="Password">Password</label>
+    );
+
     return (
       <div className="register-wrapper">
         <div className="forms">
@@ -152,8 +213,8 @@ class Authenticator extends Component {
               })
             }
           />
+          {passwordlabel}
 
-          <label htmlFor="Password">Password</label>
           <input
             type="password"
             id="Password"
@@ -168,6 +229,7 @@ class Authenticator extends Component {
           {repeatPasswordLabel}
           {userRepeatPassword}
           {userRepeatPasswordTip}
+          {userRepeatPasswordTip2}
 
           <br />
           <br />
@@ -192,7 +254,8 @@ class Authenticator extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    userLoggedIn: data => dispatch(actionCreators.userLoggedIn(data))
+    userAuthenticator: data => dispatch(actionCreators.userAuthenticator(data)),
+    setUser: data => dispatch(actionCreators.setUser(data))
   };
 };
 
