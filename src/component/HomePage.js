@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "../styles/HomepageStyle.scss";
 import { connect } from "react-redux";
-import ItemList from "./ItemList.js";
 import { API } from "aws-amplify";
 import { Category } from "../component/Constants.js";
+import MyButton from "../component/utility/MyButton.js";
 
 class HomePage extends Component {
   componentDidMount() {
@@ -24,8 +24,8 @@ class HomePage extends Component {
   render() {
     return (
       <div className="homepage-wrapper">
-        {this.props.userLoggedIn ? (
-          <ItemList />
+        {this.props.userAuthenticated ? (
+          <MyButton text="to item list" path="/itemlist" />
         ) : (
           <div className="desc">
             Hey, your personal pantry guru is here <br />
@@ -41,7 +41,7 @@ class HomePage extends Component {
 
 const MapStateToProps = state => {
   return {
-    userLoggedIn: state.authReducer.userLoggedIn
+    userAuthenticated: state.authReducer.userAuthenticated
   };
 };
 

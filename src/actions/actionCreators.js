@@ -1,12 +1,17 @@
 import actionTypes from "./actionTypes";
 
-export function userLoggedIn(userLoggedIn) {
+export function userAuthenticator(userAuthenticated) {
   return {
-    type: actionTypes.USER_LOGGED_IN,
-    USERLOGGEDIN: userLoggedIn
+    type: actionTypes.USER_AUTHENTICATED,
+    USERAUTHENTICATED: userAuthenticated
   };
 }
-
+export function setUser(user) {
+  return {
+    type: actionTypes.SET_USER,
+    COGNITO_USER: user
+  };
+}
 export function loadItems() {
   return (dispatch, getState) => {
     dispatch({

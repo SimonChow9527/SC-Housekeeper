@@ -1,14 +1,26 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-  userLoggedIn: false
+  userAuthenticated: false,
+  cognitoUser: {
+    attributes: {
+      name: "doe"
+    }
+  }
 };
 
 function authReducer(state = initState, action) {
-  if (action.type === actionTypes.USER_LOGGED_IN) {
+  if (action.type === actionTypes.USER_AUTHENTICATED) {
     return {
       ...state,
-      userLoggedIn: action.USERLOGGEDIN
+      userAuthenticated: action.USERAUTHENTICATED
+    };
+  }
+
+  if (action.type === actionTypes.SET_USER) {
+    return {
+      ...state,
+      cognitoUser: action.COGNITO_USER
     };
   }
   return state;

@@ -9,10 +9,13 @@ import rootReducer from "./reducers/rootReducer";
 import thunk from "redux-thunk";
 import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 Amplify.configure(awsconfig);
+toast.configure();
 
 ReactDOM.render(
   <Provider store={store}>
