@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styles/RegisterStyle.scss";
+import "../styles/AuthenticatorStyle.scss";
 import MyButton from "./utility/MyButton.js";
 import * as actionCreators from "../actions/actionCreators";
 import { connect } from "react-redux";
@@ -20,6 +20,11 @@ class Authenticator extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
+    this.banSubmitShowTip = this.banSubmitShowTip.bind(this);
+    this.hideTip = this.hideTip.bind(this);
+    this.enableSubmit = this.enableSubmit.bind(this);
+    this.signinBehaviour = this.signinBehaviour.bind(this);
+    this.registerBehaviour = this.registerBehaviour.bind(this);
   }
 
   handleSubmit() {
@@ -66,6 +71,43 @@ class Authenticator extends Component {
     }
     this.props.userAuthenticator(true);
     this.props.setUser(this.state.CognitoUser);
+    this.props.history.push("/");
+  }
+
+  banSubmitShowTip(SubmitBtnID, tipID) {
+    document.getElementById(SubmitBtnID).disabled = true;
+    document.getElementById(SubmitBtnID).classList.add("ban-hover");
+    document.getElementById(tipID).classList.remove("hide");
+  }
+  hideTip(tipID) {
+    document.getElementById(tipID).classList.add("hide");
+  }
+  enableSubmit(SubmitBtnID) {
+    document.getElementById(SubmitBtnID).disabled = false;
+    document.getElementById(SubmitBtnID).classList.remove("ban-hover");
+  }
+  signinBehaviour() {
+    this.setState({ isRegister: false });
+    document
+      .getElementById("register-btn")
+      .classList.remove("register-btn-isSelected");
+    document
+      .getElementById("signin-btn")
+      .classList.add("register-btn-isSelected");
+    document.getElementById("repeatPasswordtip").classList.add("hide");
+    this.enableSubmit("submitBtn");
+  }
+  registerBehaviour() {
+    this.setState({ isRegister: true });
+    document
+      .getElementById("register-btn")
+      .classList.add("register-btn-isSelected");
+    document
+      .getElementById("signin-btn")
+      .classList.remove("register-btn-isSelected");
+    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("submitBtn").classList.add("ban-hover");
+    document.getElementById("repeatPasswordtip").classList.remove("hide");
   }
 
   render() {
@@ -82,42 +124,23 @@ class Authenticator extends Component {
             },
             () => {
               if (this.state.isRegister) {
-                // confirm password not match
+                // confirm password doesn't match
                 if (this.state.userPassword !== this.state.userRepeatPassword) {
-                  document.getElementById("submitBtn").disabled = true;
-                  document
-                    .getElementById("submitBtn")
-                    .classList.add("ban-hover");
-                  document
-                    .getElementById("repeatPasswordtip")
-                    .classList.remove("hide");
+                  this.banSubmitShowTip("submitBtn", "repeatPasswordtip");
                 } else {
-                  document
-                    .getElementById("repeatPasswordtip")
-                    .classList.add("hide");
+                  this.hideTip("repeatPasswordtip");
                 }
                 if (this.state.userPassword.length < 6) {
                   //password length not correct
-                  document.getElementById("submitBtn").disabled = true;
-                  document
-                    .getElementById("submitBtn")
-                    .classList.add("ban-hover");
-                  document
-                    .getElementById("repeatPasswordtip2")
-                    .classList.remove("hide");
+                  this.banSubmitShowTip("submitBtn", "repeatPasswordtip2");
                 } else {
-                  document
-                    .getElementById("repeatPasswordtip2")
-                    .classList.add("hide");
+                  this.hideTip("repeatPasswordtip2");
                 }
                 if (
                   this.state.userPassword === this.state.userRepeatPassword &&
                   this.state.userPassword.length >= 6
                 ) {
-                  document.getElementById("submitBtn").disabled = false;
-                  document
-                    .getElementById("submitBtn")
-                    .classList.remove("ban-hover");
+                  this.enableSubmit("submitBtn");
                 }
               }
             }
@@ -162,16 +185,7 @@ class Authenticator extends Component {
               id="signin-btn"
               className="btn btn-secondary register-btn register-btn-isSelected"
               onClick={() => {
-                this.setState({ isRegister: false });
-                document
-                  .getElementById("register-btn")
-                  .classList.remove("register-btn-isSelected");
-                document
-                  .getElementById("signin-btn")
-                  .classList.add("register-btn-isSelected");
-                document
-                  .getElementById("repeatPasswordtip")
-                  .classList.add("hide");
+                this.signinBehaviour();
               }}
             >
               Sign in
@@ -181,18 +195,7 @@ class Authenticator extends Component {
               id="register-btn"
               className="btn btn-secondary register-btn "
               onClick={() => {
-                this.setState({ isRegister: true });
-                document
-                  .getElementById("register-btn")
-                  .classList.add("register-btn-isSelected");
-                document
-                  .getElementById("signin-btn")
-                  .classList.remove("register-btn-isSelected");
-                document.getElementById("submitBtn").disabled = true;
-                document.getElementById("submitBtn").classList.add("ban-hover");
-                document
-                  .getElementById("repeatPasswordtip")
-                  .classList.remove("hide");
+                this.registerBehaviour();
               }}
             >
               Register
@@ -243,7 +246,7 @@ class Authenticator extends Component {
           <MyButton
             text="Log in as guest"
             handleClick={() => {
-              this.props.userLoggedIn(true);
+              this.props.userAuthenticator(true);
             }}
           />
         </div>

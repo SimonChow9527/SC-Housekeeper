@@ -5,9 +5,11 @@ import Authenticator from "./component/Authenticator.js";
 import HomePage from "./component/HomePage.js";
 import ItemDetail from "./component/ItemDetail.js";
 import ItemList from "./component/ItemList.js";
+import UserChangePassword from "./component/UserChangePassword.js";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import * as actionCreators from "../src/actions/actionCreators.js";
 import "./styles/HomepageStyle.scss";
+import "react-dropdown/style.css";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 
@@ -30,11 +32,15 @@ class SCHousekeeper extends Component {
       <div className="App">
         <Router>
           <Navbar />
-
           <Switch>
             <Route exact path="/itemdetail/:ID" component={ItemDetail} />
             <Route exact path="/itemlist" component={ItemList} />
             <Route exact path="/login" component={Authenticator} />
+            <Route
+              exact
+              path="/changepassword"
+              component={UserChangePassword}
+            />
             <Route exact path="/" component={HomePage} />
           </Switch>
         </Router>

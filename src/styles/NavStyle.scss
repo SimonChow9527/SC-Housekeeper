@@ -39,6 +39,18 @@
 .navbar-icon{
     position: relative;
     height: 100%;
-    width: 30%;
+    width: 350px;
     right:0%;
+}
+
+.navbar .Dropdown-control{
+    background-color: inherit;
+    border: none !important;
+    text-decoration: underline;
+}
+.navbar .Dropdown-control:hover{
+    color: $yellow;
+    outline: none;
+    border: none !important;
+    box-shadow: none;
 }
