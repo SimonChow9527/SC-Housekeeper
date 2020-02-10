@@ -8,15 +8,24 @@ import MyButton from "../component/utility/MyButton.js";
 class HomePage extends Component {
   componentDidMount() {
     try {
-      let myInit = {
-        header: {
-          ID: "8",
-          UserID: "userid"
+      /*let myInit = {
+        body: {
+          userEmail: "tryit",
+          Items: {
+            "1": {
+              "1 in 1": 1,
+              "2 in 1": 2
+            },
+            "2": 2
+          }
         }
       };
-      /*API.del("items", "/items/object/8/userid", myInit).then(res => {
+      API.put("userProfileApi", "/userprofile", myInit).then(res => {
         console.log(res);
       });*/
+      API.get("userProfileApi", "/userprofile/tryit", {}).then(res => {
+        console.log(res);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -25,7 +34,9 @@ class HomePage extends Component {
     return (
       <div className="homepage-wrapper">
         {this.props.userAuthenticated ? (
-          <MyButton text="to item list" path="/itemlist" />
+          <div className="feature-table">
+            <MyButton text="to item list" path="/itemlist" />
+          </div>
         ) : (
           <div className="desc">
             Hey, your personal pantry guru is here <br />

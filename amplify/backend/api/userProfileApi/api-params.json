@@ -1,22 +1,29 @@
 {
     "paths": [
         {
-            "name": "/items",
-            "lambdaFunction": "itemsfunction",
+            "name": "/userprofile",
+            "lambdaFunction": "userProfileFunc",
             "privacy": {
-                "open": true
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
             }
         }
     ],
-    "resourceName": "items",
-    "apiName": "items",
+    "resourceName": "userProfileApi",
+    "apiName": "userProfileApi",
     "functionArns": [
         {
-            "lambdaFunction": "itemsfunction"
+            "lambdaFunction": "userProfileFunc"
         }
     ],
     "privacy": {
-        "auth": 0,
+        "auth": 1,
         "unauth": 0,
         "authRoleName": "amplify-sc-housekeeper-production-155958-authRole",
         "unAuthRoleName": "amplify-sc-housekeeper-production-155958-unauthRole"
@@ -24,12 +31,11 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "itemsfunction",
+            "resourceName": "userProfileFunc",
             "attributes": [
                 "Name",
                 "Arn"
             ]
         }
-    ],
-    "uuid": "e186e656"
+    ]
 }

@@ -5,13 +5,13 @@
 		"env": {
 			"Type": "String"
 		},
-		"storageitemdynamoDBName": {
+		"storageuserProfileName": {
 			"Type": "String",
-			"Default": "storageitemdynamoDBName"
+			"Default": "storageuserProfileName"
 		},
-		"storageitemdynamoDBArn": {
+		"storageuserProfileArn": {
 			"Type": "String",
-			"Default": "storageitemdynamoDBArn"
+			"Default": "storageuserProfileArn"
 		}
 	},
 	"Conditions": {
@@ -36,12 +36,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"itemsfunction",
+						"userProfileFunc",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"itemsfunction",
+									"userProfileFunc",
 									"-",
 									{
 										"Ref": "env"
@@ -71,7 +71,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-sc-housekeeper-production-155958-deployment",
-					"S3Key": "amplify-builds/itemsfunction-664557536d30744e706e-build.zip"
+					"S3Key": "amplify-builds/userProfileFunc-4b2f6a6a447535625245-build.zip"
 				}
 			}
 		},
@@ -81,12 +81,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"schousekeeperLambdaRole384101e9",
+						"schousekeeperLambdaRole82e2ee6d",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"schousekeeperLambdaRole384101e9",
+									"schousekeeperLambdaRole82e2ee6d",
 									"-",
 									{
 										"Ref": "env"
@@ -165,14 +165,14 @@
 							],
 							"Resource": [
 								{
-									"Ref": "storageitemdynamoDBArn"
+									"Ref": "storageuserProfileArn"
 								},
 								{
 									"Fn::Join": [
 										"/",
 										[
 											{
-												"Ref": "storageitemdynamoDBArn"
+												"Ref": "storageuserProfileArn"
 											},
 											"index/*"
 										]

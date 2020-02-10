@@ -3,8 +3,8 @@ import "../styles/ItemListStyle.scss";
 import ItemCard from "../component/ItemCard.js";
 import { connect } from "react-redux";
 import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
 import { Category } from "../component/Constants.js";
+import MyButton from "../component/utility/MyButton.js";
 
 class ItemList extends Component {
   constructor(props) {
@@ -144,6 +144,15 @@ class ItemList extends Component {
                 );
               }}
               value={defaultCategory}
+            />
+          </div>
+          <div className="item-searchbar-button">
+            <MyButton
+              text="Add item"
+              onClick={() => {
+                console.log("create item click");
+              }}
+              extraclassname="btn-custom-green"
             />
           </div>
         </div>
