@@ -5,6 +5,8 @@ import MySlider from "../component/utility/MySlider.js";
 import MyInput from "../component/utility/MyInput.js";
 import MyButton from "../component/utility/MyButton.js";
 import { Category } from "./Constants.js";
+import { toast } from "react-toastify";
+import * as actionCreators from "../actions/actionCreators";
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -17,8 +19,8 @@ class ItemDetail extends Component {
     this.calculateDays = this.calculateDays.bind(this);
     this.calculateExpireSlider = this.calculateExpireSlider.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   calculateDays(currentdate, expiredate) {
     let Difference_In_Time = expiredate.getTime() - currentdate.getTime();
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
@@ -47,13 +49,24 @@ class ItemDetail extends Component {
       }
     }));
   }
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.item.Name === null) toast.error("Name is required");
+    else {
+      let item = {
+        ...this.state.item
+      };
+      this.props.editItem(item);
+      this.props.history.push("/itemlist");
+    }
+  }
   render() {
     if (this.props.item == null) {
       this.props.history.push("/");
       return null;
     } else {
       let date =
-        this.state.item.ExpireDate === ""
+        this.state.item.ExpireDate === null
           ? ""
           : " in " +
             this.calculateDays(
@@ -64,9 +77,7 @@ class ItemDetail extends Component {
       let usageSlider = (
         <MySlider
           name="Usage"
-          defaultValue={
-            this.state.item.Usage === null ? "0" : this.state.item.Usage
-          }
+          defaultValue={this.state.item.Usage || 0}
           onChange={value =>
             this.setState(prevState => ({
               item: {
@@ -85,7 +96,7 @@ class ItemDetail extends Component {
         <MySlider
           name={"Expire" + date}
           defaultValue={
-            this.state.item.ExpireDate === ""
+            this.state.item.ExpireDate === " "
               ? 0
               : this.calculateExpireSlider(
                   this.state.item.StartDate,
@@ -102,7 +113,7 @@ class ItemDetail extends Component {
             className="expireDate-picker"
             id="expire-date-picker"
             name="ExpireDate"
-            defaultValue={this.state.item.ExpireDate}
+            defaultValue={this.state.item.ExpireDate || ""}
             type="date"
             onChange={e => this.updateState(e, "ExpireDate")}
           />
@@ -112,10 +123,8 @@ class ItemDetail extends Component {
         <MyInput
           name="Name"
           id="itemName"
-          placeholder={
-            this.state.item.Name === "" ? "enter name" : this.state.item.Name
-          }
-          value={this.state.item.Name}
+          placeholder={"enter name"}
+          value={this.state.item.Name || ""}
           onChange={e => this.updateState(e, "Name")}
         />
       );
@@ -123,10 +132,8 @@ class ItemDetail extends Component {
         <MyInput
           name="Flavor"
           id="itemFlavor"
-          placeholder={
-            this.state.item.Flavor === "" ? "N/A" : this.state.item.Flavor
-          }
-          value={this.state.item.Flavor}
+          placeholder={"N/A"}
+          value={this.state.item.Flavor || ""}
           onChange={e => this.updateState(e, "Flavor")}
         />
       );
@@ -134,10 +141,8 @@ class ItemDetail extends Component {
         <MyInput
           name="Brand"
           inputID="itemBrand"
-          placeholder={
-            this.state.item.Brand === "" ? "N/A" : this.state.item.Brand
-          }
-          value={this.state.item.Brand}
+          placeholder={"N/A"}
+          value={this.state.item.Brand || ""}
           onChange={e => this.updateState(e, "Brand")}
         />
       );
@@ -145,12 +150,8 @@ class ItemDetail extends Component {
         <MyInput
           name="Daily Usage (%)"
           id="itemDailyUsage"
-          placeholder={
-            this.state.item.DailyUsage === ""
-              ? "N/A"
-              : this.state.item.DailyUsage
-          }
-          value={this.state.item.DailyUsage}
+          placeholder={"N/A"}
+          value={this.state.item.DailyUsage || ""}
           onChange={e => this.updateState(e, "DailyUsage")}
         />
       );
@@ -158,10 +159,8 @@ class ItemDetail extends Component {
         <MyInput
           name="Note"
           id="itemDailyUsage"
-          placeholder={
-            this.state.item.Note === "" ? "N/A" : this.state.item.Note
-          }
-          value={this.state.item.Note}
+          placeholder={"N/A"}
+          value={this.state.item.Note || ""}
           onChange={e => this.updateState(e, "Note")}
         />
       );
@@ -173,7 +172,7 @@ class ItemDetail extends Component {
             className="custom-select"
             id="inputGroupSelect01"
             defaultValue={
-              this.state.item.Category !== ""
+              this.state.item.Category !== " "
                 ? this.state.item.Category
                 : Category.Default
             }
@@ -191,9 +190,7 @@ class ItemDetail extends Component {
         <MyButton
           text="Save"
           extraclassname="btn-custom-green"
-          handleClick={() => {
-            console.log(this.state.item);
-          }}
+          handleClick={e => this.handleSubmit(e)}
         />
       );
       let deleteBtn = (
@@ -249,11 +246,16 @@ class ItemDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let id = parseInt(ownProps.match.params.ID);
+  let id = ownProps.match.params.ID;
 
   return {
     item: state.itemReducer.items.find(item => item.ID === id)
   };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+    editItem: data => dispatch(actionCreators.editItem(data))
+  };
+};
 
-export default connect(mapStateToProps)(ItemDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemDetail);

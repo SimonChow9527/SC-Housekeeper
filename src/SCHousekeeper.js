@@ -5,6 +5,7 @@ import Authenticator from "./component/Authenticator.js";
 import HomePage from "./component/HomePage.js";
 import ItemDetail from "./component/ItemDetail.js";
 import ItemList from "./component/ItemList.js";
+import ItemCreator from "./component/ItemCreator.js";
 import UserChangePassword from "./component/UserChangePassword.js";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import * as actionCreators from "../src/actions/actionCreators.js";
@@ -36,6 +37,7 @@ class SCHousekeeper extends Component {
             <Route exact path="/itemdetail/:ID" component={ItemDetail} />
             <Route exact path="/itemlist" component={ItemList} />
             <Route exact path="/login" component={Authenticator} />
+            <Route exact path="/createitem" component={ItemCreator} />
             <Route
               exact
               path="/changepassword"

@@ -7,28 +7,22 @@ import MyButton from "../component/utility/MyButton.js";
 
 class HomePage extends Component {
   componentDidMount() {
-    try {
-      /*let myInit = {
+    /* try {
+      let myInit = {
         body: {
-          userEmail: "tryit",
-          Items: {
-            "1": {
-              "1 in 1": 1,
-              "2 in 1": 2
-            },
-            "2": 2
-          }
+          userEmail: this.props.cognitoUser.attributes.email,
+          Items: this.props.items
         }
       };
       API.put("userProfileApi", "/userprofile", myInit).then(res => {
         console.log(res);
-      });*/
-      API.get("userProfileApi", "/userprofile/tryit", {}).then(res => {
-        console.log(res);
+      });
+      /*API.get("userProfileApi", "/userprofile/tryit", {}).then(res => {
+        console.log(res)
       });
     } catch (error) {
       console.log(error);
-    }
+    }*/
   }
   render() {
     return (
@@ -52,7 +46,9 @@ class HomePage extends Component {
 
 const MapStateToProps = state => {
   return {
-    userAuthenticated: state.authReducer.userAuthenticated
+    userAuthenticated: state.authReducer.userAuthenticated,
+    items: state.itemReducer.items,
+    cognitoUser: state.authReducer.cognitoUser
   };
 };
 
