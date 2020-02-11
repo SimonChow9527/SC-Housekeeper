@@ -64,17 +64,22 @@ class ItemList extends Component {
       .filter(i => {
         return (
           this.state.searchString === " " ||
-          i.Name.toLowerCase().indexOf(this.state.searchString.toLowerCase()) >=
-            0 ||
-          i.Brand.toLowerCase().indexOf(
-            this.state.searchString.toLowerCase()
-          ) >= 0 ||
-          i.Flavor.toLowerCase().indexOf(
-            this.state.searchString.toLowerCase()
-          ) >= 0 ||
-          i.Category.toLowerCase().indexOf(
-            this.state.searchString.toLowerCase()
-          ) >= 0
+          (i.Name !== null &&
+            i.Name.toLowerCase().indexOf(
+              this.state.searchString.toLowerCase()
+            ) >= 0) ||
+          (i.Brand !== null &&
+            i.Brand.toLowerCase().indexOf(
+              this.state.searchString.toLowerCase()
+            ) >= 0) ||
+          (i.Flavor !== null &&
+            i.Flavor.toLowerCase().indexOf(
+              this.state.searchString.toLowerCase()
+            ) >= 0) ||
+          (i.Cate !== null &&
+            i.Category.toLowerCase().indexOf(
+              this.state.searchString.toLowerCase()
+            ) >= 0)
         );
       })
       .map(i => (
@@ -149,8 +154,8 @@ class ItemList extends Component {
           <div className="item-searchbar-button">
             <MyButton
               text="Add item"
-              onClick={() => {
-                console.log("create item click");
+              handleClick={() => {
+                this.props.history.push("/createitem");
               }}
               extraclassname="btn-custom-green"
             />

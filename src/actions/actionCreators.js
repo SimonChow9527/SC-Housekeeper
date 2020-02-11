@@ -19,3 +19,17 @@ export function loadItems() {
     });
   };
 }
+
+export function addItem(item) {
+  return {
+    type: actionTypes.ADD_ITEM,
+    ITEM: item
+  };
+}
+
+export function editItem(item) {
+  return {
+    type: actionTypes.EDIT_ITEM,
+    ITEM: item
+  };
+}

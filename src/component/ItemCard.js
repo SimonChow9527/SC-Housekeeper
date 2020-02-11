@@ -37,9 +37,7 @@ class ItemCard extends Component {
     let usageSlider = (
       <MySlider
         name="Usage"
-        defaultValue={
-          this.state.item.Usage === null ? "0" : this.state.item.Usage
-        }
+        defaultValue={this.state.item.Usage}
         onChange={() => {}}
       />
     );
