@@ -68,7 +68,7 @@ class ItemCreator extends Component {
     }));
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
 
     if (this.state.item.Name === null) toast.error("Name is required");
@@ -77,6 +77,14 @@ class ItemCreator extends Component {
         ...this.state.item
       };
       this.props.addItem(item);
+      let myInit = {
+        body: {
+          userEmail: this.props.cognitoUser.attributes.email,
+          ...this.state.item
+        }
+      };
+      await API.put("itemapi", "/items", myInit).catch(err => toast.error(err));
+
       this.props.history.push("/itemlist");
     }
   }

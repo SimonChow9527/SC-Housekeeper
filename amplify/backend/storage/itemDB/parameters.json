@@ -1,0 +1,7 @@
+{
+    "tableName": "itemDB",
+    "partitionKeyName": "userEmail",
+    "partitionKeyType": "S",
+    "sortKeyName": "ID",
+    "sortKeyType": "S"
+}
