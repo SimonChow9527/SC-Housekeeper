@@ -1,29 +1,9 @@
 import React, { Component } from "react";
 import "../styles/HomepageStyle.scss";
 import { connect } from "react-redux";
-import { API } from "aws-amplify";
-import { Category } from "../component/Constants.js";
 import MyButton from "../component/utility/MyButton.js";
 
 class HomePage extends Component {
-  componentDidMount() {
-    /* try {
-      let myInit = {
-        body: {
-          userEmail: this.props.cognitoUser.attributes.email,
-          Items: this.props.items
-        }
-      };
-      API.put("userProfileApi", "/userprofile", myInit).then(res => {
-        console.log(res);
-      });
-      /*API.get("userProfileApi", "/userprofile/tryit", {}).then(res => {
-        console.log(res)
-      });
-    } catch (error) {
-      console.log(error);
-    }*/
-  }
   render() {
     return (
       <div className="homepage-wrapper">

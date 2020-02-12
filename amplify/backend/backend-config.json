@@ -6,14 +6,14 @@
 		}
 	},
 	"function": {
-		"userProfileFunc": {
+		"itemfunction": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": [
 				{
 					"category": "storage",
-					"resourceName": "userProfile",
+					"resourceName": "itemDB",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -23,7 +23,7 @@
 		}
 	},
 	"storage": {
-		"userProfile": {
+		"itemDB": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}
@@ -36,13 +36,13 @@
 		}
 	},
 	"api": {
-		"userProfileApi": {
+		"itemapi": {
 			"service": "API Gateway",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [
 				{
 					"category": "function",
-					"resourceName": "userProfileFunc",
+					"resourceName": "itemfunction",
 					"attributes": [
 						"Name",
 						"Arn"

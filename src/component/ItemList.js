@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import Dropdown from "react-dropdown";
 import { Category } from "../component/Constants.js";
 import MyButton from "../component/utility/MyButton.js";
+import { toast } from "react-toastify";
+import { css } from "@emotion/core";
+import SyncLoader from "react-spinners/SyncLoader";
 
 class ItemList extends Component {
   constructor(props) {
@@ -18,6 +21,10 @@ class ItemList extends Component {
     this.sortItems = this.sortItems.bind(this);
     this.filterItems = this.filterItems.bind(this);
     this.sorting = this.sorting.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.error !== null && this.props.error !== undefined)
+      toast.error(this.props.error.message);
   }
   filterItems() {
     let value = this.state.showCategory;
@@ -107,7 +114,17 @@ class ItemList extends Component {
     let defaultSort =
       this.state.sortBy === "" ? "Sort by: " : this.state.sortBy;
 
-    return (
+    return this.props.isLoading ? (
+      <div className="item-list-wrapper">
+        <div className="my-spinner">
+          <SyncLoader
+            size={15}
+            color={"#17a2b8"}
+            loading={this.props.isLoading}
+          />
+        </div>
+      </div>
+    ) : (
       <div className="item-list-wrapper">
         <div className="item-searchbar">
           <div className="item-searchbar-input">
@@ -169,7 +186,9 @@ class ItemList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    items: state.itemReducer.items
+    items: state.itemReducer.items,
+    isLoading: state.itemReducer.isLoading,
+    error: state.itemReducer.error
   };
 };
 

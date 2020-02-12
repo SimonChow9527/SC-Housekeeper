@@ -20,11 +20,15 @@ class SCHousekeeper extends Component {
       .catch(err => {
         return;
       })
-      .then(data => {
-        if (data != null) {
-          this.props.setUser(data);
+      .then(user => {
+        if (user != null) {
+          this.props.setUser(user);
           this.props.userAuthenticator(true);
         }
+        return user;
+      })
+      .then(user => {
+        this.props.loadItems(user);
       });
   }
 
@@ -53,11 +57,20 @@ class SCHousekeeper extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    userAuthenticator: data => dispatch(actionCreators.userAuthenticator(data)),
-    setUser: data => dispatch(actionCreators.setUser(data))
+    cognitoUser: state.authReducer.cognitoUser,
+    items: state.itemReducer.items,
+    error: state.itemReducer.error
   };
 };
 
-export default connect(null, mapDispatchToProps)(SCHousekeeper);
+const mapDispatchToProps = dispatch => {
+  return {
+    userAuthenticator: data => dispatch(actionCreators.userAuthenticator(data)),
+    setUser: data => dispatch(actionCreators.setUser(data)),
+    loadItems: data => dispatch(actionCreators.loadItems(data))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SCHousekeeper);

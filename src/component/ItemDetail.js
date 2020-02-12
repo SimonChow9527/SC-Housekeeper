@@ -7,6 +7,7 @@ import MyButton from "../component/utility/MyButton.js";
 import { Category } from "./Constants.js";
 import { toast } from "react-toastify";
 import * as actionCreators from "../actions/actionCreators";
+import { API } from "aws-amplify";
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class ItemDetail extends Component {
     this.calculateExpireSlider = this.calculateExpireSlider.bind(this);
     this.updateState = this.updateState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   calculateDays(currentdate, expiredate) {
     let Difference_In_Time = expiredate.getTime() - currentdate.getTime();
@@ -49,16 +51,43 @@ class ItemDetail extends Component {
       }
     }));
   }
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     if (this.state.item.Name === null) toast.error("Name is required");
     else {
       let item = {
         ...this.state.item
       };
+      let myInit = {
+        body: {
+          userEmail: this.props.cognitoUser.attributes.email,
+          ...this.state.item
+        }
+      };
       this.props.editItem(item);
+      await API.put("itemapi", "/items", myInit).catch(err => {
+        toast.error(err);
+      });
       this.props.history.push("/itemlist");
     }
+  }
+
+  async handleDelete(e) {
+    e.preventDefault();
+    let item = {
+      ...this.state.item
+    };
+    this.props.deleteItem(item);
+    await API.del(
+      "itemapi",
+      "/items/object/" +
+        this.props.cognitoUser.attributes.email +
+        "/" +
+        this.state.item.ID
+    ).catch(err => {
+      console.log(err);
+    });
+    this.props.history.push("/itemlist");
   }
   render() {
     if (this.props.item == null) {
@@ -197,9 +226,7 @@ class ItemDetail extends Component {
         <MyButton
           text="Delete"
           extraclassname="btn-custom-red"
-          handleClick={() => {
-            console.log(this.state.item.id);
-          }}
+          handleClick={e => this.handleDelete(e)}
         />
       );
       let cancelBtn = (
@@ -249,12 +276,14 @@ const mapStateToProps = (state, ownProps) => {
   let id = ownProps.match.params.ID;
 
   return {
-    item: state.itemReducer.items.find(item => item.ID === id)
+    item: state.itemReducer.items.find(item => item.ID === id),
+    cognitoUser: state.authReducer.cognitoUser
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    editItem: data => dispatch(actionCreators.editItem(data))
+    editItem: data => dispatch(actionCreators.editItem(data)),
+    deleteItem: data => dispatch(actionCreators.deleteItem(data))
   };
 };
 
