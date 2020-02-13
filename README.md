@@ -36,10 +36,10 @@ to solve this problem. This app will help you to manage stuff in your pantry/med
 
 ## Potential upcoming Features
 
-- [] Usage alert 
-- [] Expire alert 
-- [] Prepare shopping list
-- [] Past usage analysis
+- [ ] Usage alert 
+- [ ] Expire alert 
+- [ ] Prepare shopping list
+- [ ] Past usage analysis
 
 ## Difficulties
 
