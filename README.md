@@ -12,7 +12,7 @@ Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
 This is a personal project that aims to provide convenience to its user (basically just me).
 It will contain some subprojects and currently the first subproject is PantryGuru.
 
-* PantryGuru /n
+* PantryGuru -> 
 Manage pantry/medkit/bathroom could be a mess, especially if you are in a large family. PantryGuru is designed
 to solve this problem. This app will help you to manage stuff in your pantry/medkit/etc effectively. 
 
