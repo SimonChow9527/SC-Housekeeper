@@ -36,7 +36,7 @@ class ItemCard extends Component {
   render() {
     let usageSlider = (
       <MySlider
-        name="Usage"
+        name="Used"
         defaultValue={this.state.item.Usage}
         onChange={() => {}}
       />

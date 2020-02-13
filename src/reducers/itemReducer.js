@@ -1,7 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
   isLoading: false,
-  error: "adasd",
+  error: "",
   items: []
 };
 

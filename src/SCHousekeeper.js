@@ -21,14 +21,14 @@ class SCHousekeeper extends Component {
         return;
       })
       .then(user => {
-        if (user != null) {
+        if (user) {
           this.props.setUser(user);
           this.props.userAuthenticator(true);
         }
         return user;
       })
       .then(user => {
-        this.props.loadItems(user);
+        if (user) this.props.loadItems(user);
       });
   }
 
@@ -59,9 +59,7 @@ class SCHousekeeper extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    cognitoUser: state.authReducer.cognitoUser,
-    items: state.itemReducer.items,
-    error: state.itemReducer.error
+    userAuthenticated: state.authReducer.userAuthenticated
   };
 };
 
