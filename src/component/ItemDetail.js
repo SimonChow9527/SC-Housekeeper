@@ -105,7 +105,7 @@ class ItemDetail extends Component {
             " day(s)";
       let usageSlider = (
         <MySlider
-          name="Usage"
+          name="Used"
           defaultValue={this.state.item.Usage || 0}
           onChange={value =>
             this.setState(prevState => ({

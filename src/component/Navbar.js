@@ -62,14 +62,6 @@ class Navbar extends Component {
             <span>SCPantryGuru</span>
           </Link>
         </div>
-        <div className="navbar-test">
-          <MyButton
-            text="testItem"
-            path="/itemdetail/2"
-            handleClick={() => {}}
-          />
-          <MyButton text="testList" path="/itemlist" handleClick={() => {}} />
-        </div>
         <div className="navbar-icon">
           {this.props.userAuthenticated ? (
             dropdown

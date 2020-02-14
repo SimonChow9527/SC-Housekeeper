@@ -6,8 +6,10 @@ import Dropdown from "react-dropdown";
 import { Category } from "../component/Constants.js";
 import MyButton from "../component/utility/MyButton.js";
 import { toast } from "react-toastify";
-import { css } from "@emotion/core";
 import SyncLoader from "react-spinners/SyncLoader";
+import * as actionCreators from "../actions/actionCreators";
+import { Auth } from "aws-amplify";
+import { API } from "aws-amplify";
 
 class ItemList extends Component {
   constructor(props) {
@@ -22,9 +24,21 @@ class ItemList extends Component {
     this.filterItems = this.filterItems.bind(this);
     this.sorting = this.sorting.bind(this);
   }
-  componentDidMount() {
-    if (this.props.error !== null && this.props.error !== undefined)
-      toast.error(this.props.error.message);
+  async componentDidMount() {
+    //this is to handle page refersh
+    //if the app gets more complex then I need to use a middleware like redux-persist
+    //but i think this is also acceptable for now
+    if (this.props.items.length === 0) {
+      Auth.currentAuthenticatedUser().then(res => {
+        API.get("itemapi", "/items/" + res.attributes.email, {}).then(res =>
+          this.setState({
+            items: res
+          })
+        );
+      });
+    }
+
+    if (this.props.error.message) toast.error(this.props.error.message);
   }
   filterItems() {
     let value = this.state.showCategory;
@@ -44,19 +58,35 @@ class ItemList extends Component {
     if (value === "Sort by: ") {
       let items = this.state.items;
       this.setState({ items: items });
-    } else if (value === "by Usage") {
+    } else if (value === "by Used high to low") {
       let items = this.state.items.sort((a, b) => this.sorting(a, b, "Usage"));
       this.setState({ items: items });
-    } else if (value === "by ExpireDate") {
+    } else if (value === "by Used low to high") {
+      let items = this.state.items
+        .sort((a, b) => this.sorting(a, b, "Usage"))
+        .reverse();
+      this.setState({ items: items });
+    } else if (value === "by ExpireDate far to close") {
       let items = this.state.items.sort((a, b) =>
         this.sorting(a, b, "ExpireDate")
       );
+      this.setState({ items: items });
+    } else if (value === "by ExpireDate close to far") {
+      let items = this.state.items
+        .sort((a, b) => this.sorting(a, b, "ExpireDate"))
+        .reverse();
       this.setState({ items: items });
     }
   }
 
   sorting(a, b, sortkey) {
-    // sorting by descending
+    if (sortkey === "ExpireDate") {
+      if (!a[sortkey] && b[sortkey]) return -1;
+      if (a[sortkey] && !b[sortkey]) return 1;
+      if (!a[sortkey] && !b[sortkey]) return 0;
+      return new Date(b[sortkey]) - new Date(a[sortkey]);
+    }
+
     if (a[sortkey] <= b[sortkey]) {
       return 1;
     }
@@ -106,7 +136,13 @@ class ItemList extends Component {
       Category.Bathroom,
       Category.General
     ];
-    let sortoptions = ["Sort by: ", "by Usage", "by ExpireDate"];
+    let sortoptions = [
+      "Sort by: ",
+      "by Used high to low",
+      "by Used low to high",
+      "by ExpireDate far to close",
+      "by ExpireDate close to far"
+    ];
     let defaultCategory =
       this.state.showCategory === ""
         ? "Category: All"
@@ -129,7 +165,7 @@ class ItemList extends Component {
         <div className="item-searchbar">
           <div className="item-searchbar-input">
             <input
-              placeholder="Type in name, brand, flavor or category to search"
+              placeholder="search by name, brand, flavor or category"
               className="my-input input-input "
               onChange={e => {
                 this.setState({
@@ -188,8 +224,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     items: state.itemReducer.items,
     isLoading: state.itemReducer.isLoading,
-    error: state.itemReducer.error
+    error: state.itemReducer.error,
+    userAuthenticated: state.authReducer.userAuthenticated
   };
 };
 
-export default connect(mapStateToProps)(ItemList);
+const mapDispatchToProps = dispatch => {
+  return {
+    loadItems: data => dispatch(actionCreators.loadItems(data))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
