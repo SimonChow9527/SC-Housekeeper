@@ -1,6 +1,6 @@
 # SC-Housekeeper
 
-Visit [here](https://master.d3jyyyjyic8ggl.amplifyapp.com/)
+Visit [here](https://master.ds0ichmwy7nuy.amplifyapp.com/)
 
 ## Table of contents
 * [Description](#description) 
@@ -24,8 +24,10 @@ to solve this problem. This app will help you to manage stuff in your pantry/med
 * Redux-thunk -> handle async data loading
 * ~~Webpack Bable~~ maybe later
 * Enzyme/Jest -> testing
+
 * AWS Lambda + RESFful API + DynamoDB -> storage & backend
 * Amazon Cognito -> user management
+
 
 
 ## Features
