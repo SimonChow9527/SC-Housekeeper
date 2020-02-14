@@ -7,14 +7,12 @@
     width: 100%;
     height:auto;
     z-index: 1;
-    justify-content: start;
 }
 
 .navbar-logo{
     position: relative;
     height: 100%;
-    width: 30%;
-    float: left;
+    width: auto;
     justify-content: start;
     text-align: start;
     font-size: xx-large;
@@ -30,22 +28,16 @@
     text-decoration: none;
 }
 
-.navbar-test{
-    height: 100%;
-    width:40%;
-    background-color: $grey;
-}
 
 .navbar-icon{
-    position: relative;
-    height: 100%;
-    width: 350px;
-    right:0%;
+    width: 250px;
+    right:20px;
 }
 
 .navbar .Dropdown-control{
     background-color: inherit;
     border: none !important;
+    padding: 8px;
     text-decoration: underline;
 }
 .navbar .Dropdown-control:hover{
@@ -53,4 +45,29 @@
     outline: none;
     border: none !important;
     box-shadow: none;
+}
+
+@media(max-width:768px){
+ 
+    .navbar{
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        display: inline-block;
+        vertical-align:middle;
+        padding: 0;
+    }
+ 
+    .navbar-logo{
+        width: 100%;
+        text-align: center;
+    }
+    .navbar-icon{
+        position: relative;
+        width: 300px;
+        right:0;
+        left:calc(calc(100% - 300px) / 2);
+    }
+    
 }

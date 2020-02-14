@@ -6,7 +6,6 @@ import Dropdown from "react-dropdown";
 import { Category } from "../component/Constants.js";
 import MyButton from "../component/utility/MyButton.js";
 import { toast } from "react-toastify";
-import { css } from "@emotion/core";
 import SyncLoader from "react-spinners/SyncLoader";
 import * as actionCreators from "../actions/actionCreators";
 import { Auth } from "aws-amplify";
@@ -166,7 +165,7 @@ class ItemList extends Component {
         <div className="item-searchbar">
           <div className="item-searchbar-input">
             <input
-              placeholder="Type in name, brand, flavor or category to search"
+              placeholder="search by name, brand, flavor or category"
               className="my-input input-input "
               onChange={e => {
                 this.setState({

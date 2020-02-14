@@ -1,15 +1,51 @@
 import React, { Component } from "react";
 import "../styles/HomepageStyle.scss";
 import { connect } from "react-redux";
-import MyButton from "../component/utility/MyButton.js";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
+import { faChartArea } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 class HomePage extends Component {
   render() {
     return (
       <div className="homepage-wrapper">
         {this.props.userAuthenticated ? (
           <div className="feature-table">
-            <MyButton text="to item list" path="/itemlist" />
+            <span className="feature-desc">Here you can </span>
+            <div className="feature-table-features">
+              <Link to="/itemlist" className="feature-link">
+                <div className="feature-element">
+                  <FontAwesomeIcon
+                    icon={faBoxOpen}
+                    size="6x"
+                    className="feature-element-icon"
+                  />
+                  <span>Manage Pantry</span>
+                </div>
+              </Link>
+              <Link to="" className="feature-link">
+                <div className="feature-element">
+                  <FontAwesomeIcon
+                    icon={faBell}
+                    size="6x"
+                    className="feature-element-icon"
+                  />
+                  <span>Set Usage Alert</span>
+                </div>
+              </Link>
+
+              <Link to="" className="feature-link">
+                <div className="feature-element">
+                  <FontAwesomeIcon
+                    icon={faChartArea}
+                    size="6x"
+                    className="feature-element-icon"
+                  />
+                  <span>Usage Analytics</span>
+                </div>
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="desc">

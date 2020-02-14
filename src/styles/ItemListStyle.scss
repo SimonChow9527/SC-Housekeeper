@@ -10,12 +10,13 @@
 }
 .item-list{
     position: relative;
-    height: 90%;
+    height: 80%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
     justify-content: center;
+    padding: 0;
 
 }
 .item-list-wrapper li{
@@ -25,32 +26,33 @@
 }
 .item-searchbar{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
     width:100%;
-    height: 10%;
     padding: 5px;
-    float: left;
 }
 .item-searchbar-input{
     position: relative;
-    width: 48%;
+    width: 500px;
+    margin-bottom: 10px;
 }
 .item-searchbar-filter{
-    padding-left: 10px;
     display: flex;
     position: relative;
-    width: 40%;
+    width: 500px;
     float: left;
+    margin-bottom: 10px;
 }
 .item-searchbar-filter .Dropdown-root{
     float: left;
     position: relative;
-    width: 100%;
+    width: 50%;
 }
 .item-searchbar-button{
     position: relative;
     padding-left: 10px;
-    justify-content: end;
-    width: 10%;
+    width: 500px;
 }
 .item-searchbar .Dropdown-control{
     border: 1px solid #ced4da;
@@ -92,6 +94,12 @@
 .my-spinner{
     z-index: 2;
     position: relative;
+    top:25%;
+    left:25%;
     height: 50%;
     width: 50%;
+}
+
+@media(max-width:768px){
+
 }
