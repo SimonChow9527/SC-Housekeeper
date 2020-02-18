@@ -249,6 +249,14 @@ class Authenticator extends Component {
               this.props.userAuthenticator(true);
             }}
           />
+          <MyButton
+            text="google log in"
+            handleClick={() => {
+              Auth.federatedSignIn({ provider: "Google" }).then(res =>
+                console.log(res)
+              );
+            }}
+          />
         </div>
       </div>
     );
