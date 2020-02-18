@@ -252,9 +252,10 @@ class Authenticator extends Component {
           <MyButton
             text="google log in"
             handleClick={() => {
-              Auth.federatedSignIn({ provider: "Google" }).then(res =>
-                toast.success(res)
-              );
+              Auth.federatedSignIn({ provider: "Google" }).then(res => {
+                toast.success(res.authenticated);
+                toast.success("Google login success! please refresh your page");
+              });
             }}
           />
         </div>
