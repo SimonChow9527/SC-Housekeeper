@@ -25,6 +25,7 @@ class Authenticator extends Component {
     this.enableSubmit = this.enableSubmit.bind(this);
     this.signinBehaviour = this.signinBehaviour.bind(this);
     this.registerBehaviour = this.registerBehaviour.bind(this);
+    this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
   }
 
   handleSubmit() {
@@ -72,6 +73,13 @@ class Authenticator extends Component {
     this.props.userAuthenticator(true);
     this.props.setUser(this.state.CognitoUser);
     this.props.history.push("/");
+  }
+
+  async handleGoogleLogin() {
+    await Auth.federatedSignIn({ provider: "Google" }).then(res => {
+      toast.success(res.authenticated);
+      toast.success("Google login success! please refresh your page");
+    });
   }
 
   banSubmitShowTip(SubmitBtnID, tipID) {
@@ -252,10 +260,7 @@ class Authenticator extends Component {
           <MyButton
             text="google log in"
             handleClick={() => {
-              Auth.federatedSignIn({ provider: "Google" }).then(res => {
-                toast.success(res.authenticated);
-                toast.success("Google login success! please refresh your page");
-              });
+              this.handleGoogleLogin();
             }}
           />
         </div>
