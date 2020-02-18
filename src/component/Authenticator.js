@@ -253,7 +253,7 @@ class Authenticator extends Component {
             text="google log in"
             handleClick={() => {
               Auth.federatedSignIn({ provider: "Google" }).then(res =>
-                console.log(res)
+                toast.success(res)
               );
             }}
           />
