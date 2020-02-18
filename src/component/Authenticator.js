@@ -26,6 +26,7 @@ class Authenticator extends Component {
     this.signinBehaviour = this.signinBehaviour.bind(this);
     this.registerBehaviour = this.registerBehaviour.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
+    this.handleAndySignin = this.handleAndySignin.bind(this);
   }
 
   handleSubmit() {
@@ -75,11 +76,26 @@ class Authenticator extends Component {
     this.props.history.push("/");
   }
 
+  async handleAndySignin() {
+    let username = "Andy@dummy.com";
+    let password = "123456";
+    try {
+      await Auth.signIn(username, password).then(data =>
+        this.setState({
+          CognitoUser: data
+        })
+      );
+    } catch (err) {
+      toast.error(err.message);
+      return;
+    }
+    this.props.userAuthenticator(true);
+    this.props.setUser(this.state.CognitoUser);
+    this.props.history.push("/");
+  }
+
   async handleGoogleLogin() {
-    await Auth.federatedSignIn({ provider: "Google" }).then(res => {
-      toast.success(res.authenticated);
-      toast.success("Google login success! please refresh your page");
-    });
+    await Auth.federatedSignIn();
   }
 
   banSubmitShowTip(SubmitBtnID, tipID) {
@@ -243,7 +259,6 @@ class Authenticator extends Component {
           {userRepeatPasswordTip2}
 
           <br />
-          <br />
           <MyButton
             text="Submit"
             id="submitBtn"
@@ -251,12 +266,17 @@ class Authenticator extends Component {
               this.handleSubmit();
             }}
           />
+        </div>
+        <div className="form-tip">or you can</div>
+        <div className="forms-other">
+          <br />
           <MyButton
             text="Log in as guest"
             handleClick={() => {
-              this.props.userAuthenticator(true);
+              this.handleAndySignin();
             }}
           />
+          <br />
           <MyButton
             text="google log in"
             handleClick={() => {
