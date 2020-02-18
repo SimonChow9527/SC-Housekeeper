@@ -72,14 +72,22 @@
 
   
 @media(max-width:768px){
+    .homepage-wrapper{
+        align-items: center;
+        justify-content: center;
+    }
+    .homepage-wrapper .desc{
+        position: relative;
+        width: 90%;
+        margin: 0;
+        left: 5%;
+        
+    }
     .feature-table{
         position: relative;
         top:20%;
         height: 80%;
         width: 100%;
-    }
-    .feature-desc{
-        margin-bottom:20px;
     }
     
     .feature-table-features{

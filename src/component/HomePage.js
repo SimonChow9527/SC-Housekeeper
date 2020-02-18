@@ -32,6 +32,7 @@ class HomePage extends Component {
                     className="feature-element-icon"
                   />
                   <span>Set Usage Alert</span>
+                  <span>under construction</span>
                 </div>
               </Link>
 
@@ -43,6 +44,7 @@ class HomePage extends Component {
                     className="feature-element-icon"
                   />
                   <span>Usage Analytics</span>
+                  <span>under construction</span>
                 </div>
               </Link>
             </div>

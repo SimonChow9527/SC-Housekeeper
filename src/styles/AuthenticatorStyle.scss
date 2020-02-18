@@ -6,14 +6,33 @@
     width: 100%;
     margin: 0 auto;
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;;
 }
 .forms{
     position: relative;
-    height: 50%;
-    width: 30%;
-    left: 10%;
+    height: 380px;
+    width: 320px;
     top: 25%;
+
+}
+.forms-other{
+    position: relative;
+    top: 25%;
+    height: 380px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-tip{
+    position: relative;
+    top: 25%;
+    height: 200px;
+    width: 100px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 200px;
+
 }
 
 .forms label{
@@ -59,4 +78,13 @@
     left:20%;
     height: 30%;
     width: 30%;
+}
+
+@media(max-width:768px){
+    .register-wrapper{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+    }
 }
