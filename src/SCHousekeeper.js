@@ -44,28 +44,26 @@ class SCHousekeeper extends Component {
 
   render() {
     return (
-      this.state.isLoaded && (
-        <div className="App">
-          <Router>
-            <Navbar />
-            <Switch>
-              <Route exact path="/itemdetail/:ID" component={ItemDetail} />
-              <Route exact path="/itemlist" component={ItemList} />
-              <Route exact path="/login" component={Authenticator} />
-              <Route exact path="/createitem" component={ItemCreator} />
-              <Route
-                exact
-                path="/changepassword"
-                component={UserChangePassword}
-              />
-              <Route exact path="/" component={HomePage} />
-              <Route component={PageNotFound} />
-            </Switch>
-          </Router>
+      <div className="App">
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/itemdetail/:ID" component={ItemDetail} />
+            <Route exact path="/itemlist" component={ItemList} />
+            <Route exact path="/login" component={Authenticator} />
+            <Route exact path="/createitem" component={ItemCreator} />
+            <Route
+              exact
+              path="/changepassword"
+              component={UserChangePassword}
+            />
+            <Route exact path="/" component={HomePage} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </Router>
 
-          <Footer />
-        </div>
-      )
+        <Footer />
+      </div>
     );
   }
 }
