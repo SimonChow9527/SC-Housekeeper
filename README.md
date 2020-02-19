@@ -45,6 +45,8 @@ to solve this problem. This app will help you to manage stuff in your pantry/med
 
 ## Difficulties
 
+* redux state lost on page refresh -> I may start to use redux-presist when state gets more complex.
+* react-router give 404 on page refresh -> check [this](https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually)
 
 ## Scenarios
 
