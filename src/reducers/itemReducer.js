@@ -59,6 +59,13 @@ function itemReducer(state = initState, action) {
       items: [...state.items, ...action.items]
     };
   }
+  if (action.type === actionTypes.RESET_ITEMS) {
+    return {
+      ...state,
+      isLoading: false,
+      items: [...state.items, ...action.items]
+    };
+  }
 
   return state;
 }
