@@ -47,7 +47,12 @@ export function loadItemsFailure(err) {
     error: err
   };
 }
-
+export function resetItems(items) {
+  return {
+    type: actionTypes.RESET_ITEMS,
+    items: items
+  };
+}
 export function addItem(item) {
   return {
     type: actionTypes.ADD_ITEM,

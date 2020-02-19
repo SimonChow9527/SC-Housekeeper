@@ -31,11 +31,14 @@ class ItemList extends Component {
     //but i think this is also acceptable for now
     if (this.props.items.length === 0) {
       Auth.currentAuthenticatedUser().then(res => {
-        API.get("itemapi", "/items/" + res.attributes.email, {}).then(res =>
-          this.setState({
-            items: res
+        API.get("itemapi", "/items/" + res.attributes.email, {})
+          .then(res => {
+            this.setState({
+              items: res
+            });
+            return res;
           })
-        );
+          .then(res => this.props.resetItems(res));
       });
     }
 
@@ -232,7 +235,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadItems: data => dispatch(actionCreators.loadItems(data))
+    loadItems: data => dispatch(actionCreators.loadItems(data)),
+    resetItems: data => dispatch(actionCreators.resetItems(data))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
