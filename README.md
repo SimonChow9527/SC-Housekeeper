@@ -1,6 +1,6 @@
 # SC-Housekeeper
 
-Visit [here](https://master.ds0ichmwy7nuy.amplifyapp.com/)
+Visit [here](https://master.d1gd74nqovwd7u.amplifyapp.com/)
 
 ## Table of contents
 * [Description](#description) 
