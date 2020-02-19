@@ -52,6 +52,7 @@ export function resetItems(items) {
     items: items
   };
 }
+
 export function addItem(item) {
   return {
     type: actionTypes.ADD_ITEM,

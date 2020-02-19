@@ -8,6 +8,7 @@ import MyButton from "../component/utility/MyButton.js";
 import { toast } from "react-toastify";
 import SyncLoader from "react-spinners/SyncLoader";
 import * as actionCreators from "../actions/actionCreators";
+import { Auth, API } from "aws-amplify";
 
 class ItemList extends Component {
   constructor(props) {
@@ -23,11 +24,18 @@ class ItemList extends Component {
     this.sorting = this.sorting.bind(this);
   }
   async componentDidMount() {
-    //this is to handle page refersh
-    //redux store will lose state on page refresh
-    //if the app gets more complex then I need to use a middleware like redux-persist
-    //but i think this is also acceptable for now
-
+    if (this.props.items.length === 0) {
+      console.log("length 0");
+      Auth.currentAuthenticatedUser().then(user => {
+        API.get("itemapi", "/items/" + user.attributes.email, {}).then(data => {
+          this.setState({
+            items: data
+          });
+          this.props.resetItems(data);
+          console.log("reset");
+        });
+      });
+    }
     if (this.props.error.message) toast.error(this.props.error.message);
   }
   filterItems() {

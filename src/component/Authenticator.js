@@ -94,6 +94,7 @@ class Authenticator extends Component {
     this.props.history.push("/");
   }
 
+  //deprecated for now
   async handleGoogleLogin() {
     await Auth.federatedSignIn();
   }
@@ -277,12 +278,6 @@ class Authenticator extends Component {
             }}
           />
           <br />
-          <MyButton
-            text="google log in"
-            handleClick={() => {
-              this.handleGoogleLogin();
-            }}
-          />
         </div>
       </div>
     );
