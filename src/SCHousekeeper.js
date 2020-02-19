@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import Navbar from "./component/Navbar.js";
-import Footer from "./component/Footer.js";
-import Authenticator from "./component/Authenticator.js";
-import HomePage from "./component/HomePage.js";
-import ItemDetail from "./component/ItemDetail.js";
-import ItemList from "./component/ItemList.js";
-import ItemCreator from "./component/ItemCreator.js";
-import UserChangePassword from "./component/UserChangePassword.js";
+import Navbar from "./component/Navbar";
+import Footer from "./component/Footer";
+import Authenticator from "./component/Authenticator";
+import HomePage from "./component/HomePage";
+import ItemDetail from "./component/ItemDetail";
+import ItemList from "./component/ItemList";
+import ItemCreator from "./component/ItemCreator";
+import UserChangePassword from "./component/UserChangePassword";
+import PageNotFound from "./component/PageNotFound";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import * as actionCreators from "../src/actions/actionCreators.js";
+import * as actionCreators from "../src/actions/actionCreators";
 import "./styles/HomepageStyle.scss";
 import "react-dropdown/style.css";
 import { Auth } from "aws-amplify";
@@ -48,6 +49,7 @@ class SCHousekeeper extends Component {
               component={UserChangePassword}
             />
             <Route exact path="/" component={HomePage} />
+            <Route component={PageNotFound} />
           </Switch>
         </Router>
 
