@@ -16,12 +16,6 @@ import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 
 class SCHousekeeper extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoaded: false
-    };
-  }
   async componentDidMount() {
     Auth.currentAuthenticatedUser()
       .catch(err => {
@@ -31,14 +25,8 @@ class SCHousekeeper extends Component {
         if (user) {
           this.props.setUser(user);
           this.props.userAuthenticator(true);
+          this.props.loadItems(user);
         }
-        return user;
-      })
-      .then(res => this.props.loadItems(res))
-      .then(() => {
-        this.setState({
-          isLoaded: true
-        });
       });
   }
 
