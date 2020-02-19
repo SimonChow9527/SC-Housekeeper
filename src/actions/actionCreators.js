@@ -16,7 +16,6 @@ export function setUser(user) {
 export function loadItems(cognitoUser) {
   return dispatch => {
     dispatch(loadItemsBegin());
-
     return API.get("itemapi", "/items/" + cognitoUser.attributes.email, {})
       .catch(err => {
         dispatch(loadItemsFailure(err));

@@ -53,17 +53,23 @@ function itemReducer(state = initState, action) {
     };
   }
   if (action.type === actionTypes.FETCH_ITEMS_SUCCESS) {
+    let tempArray = [...state.items, ...action.items];
+    let tempSet = new Set(tempArray);
+    let finalArray = Array.from(tempSet);
     return {
       ...state,
       isLoading: false,
-      items: [...state.items, ...action.items]
+      items: [...finalArray]
     };
   }
   if (action.type === actionTypes.RESET_ITEMS) {
+    let tempArray = [...state.items, ...action.items];
+    let tempSet = new Set(tempArray);
+    let finalArray = Array.from(tempSet);
     return {
       ...state,
       isLoading: false,
-      items: [...state.items, ...action.items]
+      items: [...finalArray]
     };
   }
 

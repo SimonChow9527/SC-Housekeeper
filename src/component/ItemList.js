@@ -8,8 +8,6 @@ import MyButton from "../component/utility/MyButton.js";
 import { toast } from "react-toastify";
 import SyncLoader from "react-spinners/SyncLoader";
 import * as actionCreators from "../actions/actionCreators";
-import { Auth } from "aws-amplify";
-import { API } from "aws-amplify";
 
 class ItemList extends Component {
   constructor(props) {
@@ -29,18 +27,6 @@ class ItemList extends Component {
     //redux store will lose state on page refresh
     //if the app gets more complex then I need to use a middleware like redux-persist
     //but i think this is also acceptable for now
-    if (this.props.items.length === 0) {
-      Auth.currentAuthenticatedUser().then(res => {
-        API.get("itemapi", "/items/" + res.attributes.email, {})
-          .then(res => {
-            this.setState({
-              items: res
-            });
-            return res;
-          })
-          .then(res => this.props.resetItems(res));
-      });
-    }
 
     if (this.props.error.message) toast.error(this.props.error.message);
   }
