@@ -16,6 +16,12 @@ import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 
 class SCHousekeeper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoaded: false
+    };
+  }
   async componentDidMount() {
     Auth.currentAuthenticatedUser()
       .catch(err => {
@@ -28,33 +34,38 @@ class SCHousekeeper extends Component {
         }
         return user;
       })
-      .then(user => {
-        if (user) this.props.loadItems(user);
+      .then(res => this.props.loadItems(res))
+      .then(() => {
+        this.setState({
+          isLoaded: true
+        });
       });
   }
 
   render() {
     return (
-      <div className="App">
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path="/itemdetail/:ID" component={ItemDetail} />
-            <Route exact path="/itemlist" component={ItemList} />
-            <Route exact path="/login" component={Authenticator} />
-            <Route exact path="/createitem" component={ItemCreator} />
-            <Route
-              exact
-              path="/changepassword"
-              component={UserChangePassword}
-            />
-            <Route exact path="/" component={HomePage} />
-            <Route component={PageNotFound} />
-          </Switch>
-        </Router>
+      this.state.isLoaded && (
+        <div className="App">
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route exact path="/itemdetail/:ID" component={ItemDetail} />
+              <Route exact path="/itemlist" component={ItemList} />
+              <Route exact path="/login" component={Authenticator} />
+              <Route exact path="/createitem" component={ItemCreator} />
+              <Route
+                exact
+                path="/changepassword"
+                component={UserChangePassword}
+              />
+              <Route exact path="/" component={HomePage} />
+              <Route component={PageNotFound} />
+            </Switch>
+          </Router>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      )
     );
   }
 }
