@@ -26,6 +26,7 @@ class ItemList extends Component {
   }
   async componentDidMount() {
     //this is to handle page refersh
+    //redux store will lose state on page refresh
     //if the app gets more complex then I need to use a middleware like redux-persist
     //but i think this is also acceptable for now
     if (this.props.items.length === 0) {

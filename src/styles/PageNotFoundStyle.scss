@@ -1,0 +1,27 @@
+  
+@import 'Colors';
+
+.page-not-found {
+
+	height: 100%;
+	width: 100%;
+}
+
+.pnf-container{
+	
+	position: relative;
+	height: 60%;
+	width: 60%;
+	left: 20%;
+	top: 20%;
+	text-align: center;
+	color:$grey3;
+}
+
+.sub-container{
+	position: relative;
+	height: 50%;
+	width: 100%;
+	text-align: center;
+	justify-content: center;
+}
