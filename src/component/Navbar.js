@@ -12,7 +12,7 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirectToChangePassword: false
+      redirectToChangePassword: false,
     };
     this.handleLogoutDropdown = this.handleLogoutDropdown.bind(this);
     this.userLogout = this.userLogout.bind(this);
@@ -34,7 +34,7 @@ class Navbar extends Component {
     }
   }
   userLogout() {
-    Auth.signOut().catch(err => console.log(err));
+    Auth.signOut().catch((err) => console.log(err));
     this.props.userAuthenticator(false);
     this.props.setUser(null);
     this.props.history.push("/");
@@ -48,7 +48,7 @@ class Navbar extends Component {
         <Dropdown
           options={dropdownOptions}
           placeholder={"Hello " + this.props.cognitoUser.attributes.name}
-          onChange={value => {
+          onChange={(value) => {
             this.handleLogoutDropdown(value);
           }}
         />
@@ -56,35 +56,41 @@ class Navbar extends Component {
         ""
       );
     return (
-      <div className="navbar">
-        <div className="navbar-logo">
-          <Link to="/">
-            <span>SCPantryGuru</span>
-          </Link>
-        </div>
-        <div className="navbar-icon">
-          {this.props.userAuthenticated ? (
-            dropdown
-          ) : (
-            <MyButton text="Login" path="/login" handleClick={() => {}} />
-          )}
+      <div className="navBar my-navbar">
+        <div className="d-flex mb-3 my-navbar">
+          <div className="mr-auto p-2 ">
+            <Link to="/">
+              <span>SCPantryGuru</span>
+            </Link>
+          </div>
+          <div className="p-2 nav-icons">
+            <Link to="/userpanel">
+              <span className="nav-item-custom">User panel</span>
+            </Link>
+          </div>
+          <div className="p-2 nav-icons">
+            <Link to="/login">
+              <span className="nav-item-custom">login</span>
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userAuthenticated: state.authReducer.userAuthenticated,
-    cognitoUser: state.authReducer.cognitoUser
+    cognitoUser: state.authReducer.cognitoUser,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    userAuthenticator: data => dispatch(actionCreators.userAuthenticator(data)),
-    setUser: data => dispatch(actionCreators.setUser(data))
+    userAuthenticator: (data) =>
+      dispatch(actionCreators.userAuthenticator(data)),
+    setUser: (data) => dispatch(actionCreators.setUser(data)),
   };
 };
 

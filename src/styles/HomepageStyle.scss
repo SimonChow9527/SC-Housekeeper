@@ -4,13 +4,18 @@
     top:0;
     height: 100%;
     width: 100%;
+    background-color: $SAF_green;
 }
 
-.homepage-wrapper .desc{
+.desc{
     position: relative;
-    color: $grey3;
-    font-size: xx-large !important;
-    top:25%;
+    top:30%;
+    color: $SAF_loght_blue;
+}
+
+.desc h1{
+    font-size: 5vw !important; 
+    color: $SAF_light_orange !important;
 }
 .homepage-wrapper .searchbar{
     position: relative;
@@ -58,7 +63,7 @@
     display: block;
   }
   .feature-element-icon{
-    color:$grey3;
+    color:$SAF_loght_blue;
   }
   
   

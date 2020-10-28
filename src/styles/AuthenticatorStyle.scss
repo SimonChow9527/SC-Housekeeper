@@ -1,84 +1,27 @@
 @import "./Colors.scss";
 @import "./UtilityStyle.scss";
+
 .register-wrapper{
     position: relative;
     height: 100%;
     width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-around;;
+    justify-content: center;
+    align-items: center;
 }
 .forms{
-    position: relative;
-    height: 380px;
+    
+    height: 220px;
     width: 320px;
-    top: 25%;
-
-}
-.forms-other{
-    position: relative;
-    top: 25%;
-    height: 380px;
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-tip{
-    position: relative;
-    top: 25%;
-    height: 200px;
-    width: 100px;
-    vertical-align: middle;
-    text-align: center;
-    line-height: 200px;
+  
 
 }
 
-.forms label{
-    display: block;
+.forms button{
+    margin: 15px;
 }
 
-.hide {
-    display: none !important;
-}
-.register-btn{
-    border: none;
-}
-.register-btn:hover{
-    background-color:$yellow !important;
-    border: none;
-    color:$white !important;
-    cursor: pointer;
-    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-.register-btn:focus{
-    background-color:$yellow !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-.register-btn-isSelected{
-    background-color:$yellow !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-.ban-hover:hover{
-    background-color: $grey3 !important;
-    cursor:not-allowed !important;
-    box-shadow: none !important;
-}
-.repeatPasswordtip{
-    color: $bootstrap-red;
-}
-
-.change-password{
-    position: relative;
-    top:30%;
-    left:20%;
-    height: 30%;
-    width: 30%;
-}
 
 @media(max-width:768px){
     .register-wrapper{

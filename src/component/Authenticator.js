@@ -14,7 +14,7 @@ class Authenticator extends Component {
       userPassword: "",
       userRepeatPassword: "",
       CognitoUsername: "",
-      isRegister: false
+      isRegister: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,8 +44,8 @@ class Authenticator extends Component {
         password,
         attributes: {
           email: email,
-          name: username
-        }
+          name: username,
+        },
       });
     } catch (err) {
       toast.error(err.message);
@@ -62,9 +62,9 @@ class Authenticator extends Component {
     let username = this.state.userEmail;
     let password = this.state.userPassword;
     try {
-      await Auth.signIn(username, password).then(data =>
+      await Auth.signIn(username, password).then((data) =>
         this.setState({
-          CognitoUser: data
+          CognitoUser: data,
         })
       );
     } catch (err) {
@@ -80,9 +80,9 @@ class Authenticator extends Component {
     let username = "Andy@dummy.com";
     let password = "123456";
     try {
-      await Auth.signIn(username, password).then(data =>
+      await Auth.signIn(username, password).then((data) =>
         this.setState({
-          CognitoUser: data
+          CognitoUser: data,
         })
       );
     } catch (err) {
@@ -136,98 +136,9 @@ class Authenticator extends Component {
   }
 
   render() {
-    let userRepeatPassword = this.state.isRegister ? (
-      <input
-        type="password"
-        id="RepeatPassword"
-        className="my-input"
-        placeholder="Please confirm your Password"
-        onChange={e =>
-          this.setState(
-            {
-              userRepeatPassword: e.target.value
-            },
-            () => {
-              if (this.state.isRegister) {
-                // confirm password doesn't match
-                if (this.state.userPassword !== this.state.userRepeatPassword) {
-                  this.banSubmitShowTip("submitBtn", "repeatPasswordtip");
-                } else {
-                  this.hideTip("repeatPasswordtip");
-                }
-                if (this.state.userPassword.length < 6) {
-                  //password length not correct
-                  this.banSubmitShowTip("submitBtn", "repeatPasswordtip2");
-                } else {
-                  this.hideTip("repeatPasswordtip2");
-                }
-                if (
-                  this.state.userPassword === this.state.userRepeatPassword &&
-                  this.state.userPassword.length >= 6
-                ) {
-                  this.enableSubmit("submitBtn");
-                }
-              }
-            }
-          )
-        }
-      />
-    ) : (
-      ""
-    );
-    let repeatPasswordLabel = this.state.isRegister ? (
-      <label htmlFor="RepeatPassword">Confirm Password</label>
-    ) : (
-      ""
-    );
-    let userRepeatPasswordTip = (
-      <small id="repeatPasswordtip" className="repeatPasswordtip hide">
-        Password doesn't match <br />
-      </small>
-    );
-    let userRepeatPasswordTip2 = (
-      <small id="repeatPasswordtip2" className="repeatPasswordtip hide">
-        Password length not correct (minimum 6)
-      </small>
-    );
-
-    let passwordlabel = this.state.isRegister ? (
-      <label htmlFor="Password">Password (min length 6) </label>
-    ) : (
-      <label htmlFor="Password">Password</label>
-    );
-
     return (
       <div className="register-wrapper">
         <div className="forms">
-          <div
-            className="btn-group"
-            role="group"
-            aria-label="register or sign in"
-          >
-            <button
-              type="button"
-              id="signin-btn"
-              className="btn btn-secondary register-btn register-btn-isSelected"
-              onClick={() => {
-                this.signinBehaviour();
-              }}
-            >
-              Sign in
-            </button>
-            <button
-              type="button"
-              id="register-btn"
-              className="btn btn-secondary register-btn "
-              onClick={() => {
-                this.registerBehaviour();
-              }}
-            >
-              Register
-            </button>
-          </div>
-          <br />
-          <br />
           <label htmlFor="Email">Email address</label>
           <input
             type="email"
@@ -235,48 +146,44 @@ class Authenticator extends Component {
             className="my-input"
             aria-describedby="emailHelp"
             placeholder="Enter email"
-            onChange={e =>
+            onChange={(e) =>
               this.setState({
-                userEmail: e.target.value
+                userEmail: e.target.value,
               })
             }
           />
-          {passwordlabel}
+          <label htmlFor="Password">Password</label>
 
           <input
             type="password"
             id="Password"
             className="my-input"
             placeholder="Password"
-            onChange={e =>
+            onChange={(e) =>
               this.setState({
-                userPassword: e.target.value
+                userPassword: e.target.value,
               })
             }
           />
-          {repeatPasswordLabel}
-          {userRepeatPassword}
-          {userRepeatPasswordTip}
-          {userRepeatPasswordTip2}
 
           <br />
-          <MyButton
-            text="Submit"
+          <button
             id="submitBtn"
-            handleClick={() => {
+            className="my-button"
+            onClick={() => {
               this.handleSubmit();
             }}
-          />
-        </div>
-        <div className="form-tip">or you can</div>
-        <div className="forms-other">
-          <br />
-          <MyButton
-            text="Log in as guest"
-            handleClick={() => {
+          >
+            Log in
+          </button>
+          <button
+            className="my-button"
+            onClick={() => {
               this.handleAndySignin();
             }}
-          />
+          >
+            I'm a guest
+          </button>
           <br />
         </div>
       </div>
@@ -284,10 +191,11 @@ class Authenticator extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    userAuthenticator: data => dispatch(actionCreators.userAuthenticator(data)),
-    setUser: data => dispatch(actionCreators.setUser(data))
+    userAuthenticator: (data) =>
+      dispatch(actionCreators.userAuthenticator(data)),
+    setUser: (data) => dispatch(actionCreators.setUser(data)),
   };
 };
 
