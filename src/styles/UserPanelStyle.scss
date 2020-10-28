@@ -1,0 +1,9 @@
+@import'./Colors.scss';
+
+.feature-table{
+    position: relative;
+    width: 100%;
+    height: calc(100% - 50px);
+    top:50px;
+    background-color: $SAF_green;
+}

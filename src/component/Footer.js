@@ -8,7 +8,7 @@ const currentYear = () => {
 const contactLink = () => {
   return (
     <a href="https://simonchow.dev" target="_blank" rel="noopener noreferrer">
-      simonchow.dev
+      Simon Chow
     </a>
   );
 };
@@ -18,9 +18,8 @@ const Footer = () => {
   return (
     <div className="footer">
       <span className="footer-copyright">
-        @{currentYear()} copywrite-simon chow. All rights reserved
+        @{currentYear()} copywrite-{contactLink()}. All rights reserved
       </span>
-      <span className="footer-contact">Contact me: visit {contactLink()}</span>
     </div>
   );
 };

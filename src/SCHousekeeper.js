@@ -6,8 +6,8 @@ import HomePage from "./component/HomePage";
 import ItemDetail from "./component/ItemDetail";
 import ItemList from "./component/ItemList";
 import ItemCreator from "./component/ItemCreator";
-import UserChangePassword from "./component/UserChangePassword";
 import PageNotFound from "./component/PageNotFound";
+import UserPanel from "./component/UserPanel";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import * as actionCreators from "../src/actions/actionCreators";
 import "./styles/HomepageStyle.scss";
@@ -18,10 +18,10 @@ import { connect } from "react-redux";
 class SCHousekeeper extends Component {
   async componentDidMount() {
     Auth.currentAuthenticatedUser()
-      .catch(err => {
+      .catch((err) => {
         return;
       })
-      .then(user => {
+      .then((user) => {
         if (user) {
           this.props.setUser(user);
           this.props.userAuthenticator(true);
@@ -40,11 +40,7 @@ class SCHousekeeper extends Component {
             <Route exact path="/itemlist" component={ItemList} />
             <Route exact path="/login" component={Authenticator} />
             <Route exact path="/createitem" component={ItemCreator} />
-            <Route
-              exact
-              path="/changepassword"
-              component={UserChangePassword}
-            />
+            <Route exact path="/userpanel" component={UserPanel} />
             <Route exact path="/" component={HomePage} />
             <Route component={PageNotFound} />
           </Switch>
@@ -58,15 +54,16 @@ class SCHousekeeper extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    userAuthenticated: state.authReducer.userAuthenticated
+    userAuthenticated: state.authReducer.userAuthenticated,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    userAuthenticator: data => dispatch(actionCreators.userAuthenticator(data)),
-    setUser: data => dispatch(actionCreators.setUser(data)),
-    loadItems: data => dispatch(actionCreators.loadItems(data))
+    userAuthenticator: (data) =>
+      dispatch(actionCreators.userAuthenticator(data)),
+    setUser: (data) => dispatch(actionCreators.setUser(data)),
+    loadItems: (data) => dispatch(actionCreators.loadItems(data)),
   };
 };
 
