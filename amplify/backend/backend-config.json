@@ -1,49 +1,7 @@
 {
-    "hosting": {},
-    "function": {
-        "itemfunction": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true,
-            "dependsOn": [
-                {
-                    "category": "storage",
-                    "resourceName": "itemDB",
-                    "attributes": [
-                        "Name",
-                        "Arn"
-                    ]
-                }
-            ]
-        }
-    },
-    "storage": {
-        "itemDB": {
-            "service": "DynamoDB",
-            "providerPlugin": "awscloudformation"
-        }
-    },
-    "auth": {
-        "schousekeeper4e77cf62": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": []
-        }
-    },
-    "api": {
-        "itemapi": {
-            "service": "API Gateway",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "itemfunction",
-                    "attributes": [
-                        "Name",
-                        "Arn"
-                    ]
-                }
-            ]
-        }
-    }
+	"hosting": {},
+	"function": {},
+	"storage": {},
+	"auth": {},
+	"api": {}
 }
