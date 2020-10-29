@@ -8,7 +8,6 @@ import MyButton from "../component/utility/MyButton.js";
 import { toast } from "react-toastify";
 import SyncLoader from "react-spinners/SyncLoader";
 import * as actionCreators from "../actions/actionCreators";
-import { Auth, API } from "aws-amplify";
 
 class ItemList extends Component {
   constructor(props) {
@@ -17,34 +16,20 @@ class ItemList extends Component {
       items: this.props.items,
       searchString: "",
       showCategory: "",
-      sortBy: ""
+      sortBy: "",
     };
     this.sortItems = this.sortItems.bind(this);
     this.filterItems = this.filterItems.bind(this);
     this.sorting = this.sorting.bind(this);
   }
-  async componentDidMount() {
-    if (this.props.items.length === 0) {
-      console.log("length 0");
-      Auth.currentAuthenticatedUser().then(user => {
-        API.get("itemapi", "/items/" + user.attributes.email, {}).then(data => {
-          this.setState({
-            items: data
-          });
-          this.props.resetItems(data);
-          console.log("reset");
-        });
-      });
-    }
-    if (this.props.error.message) toast.error(this.props.error.message);
-  }
+
   filterItems() {
     let value = this.state.showCategory;
     if (value === "Category: All") {
       let values = this.props.items;
       this.setState({ items: values });
     } else {
-      let values = this.props.items.filter(i => {
+      let values = this.props.items.filter((i) => {
         return i.Category.toLowerCase().indexOf(value.toLowerCase()) >= 0;
       });
       this.setState({ items: values });
@@ -96,7 +81,7 @@ class ItemList extends Component {
 
   render() {
     let listItem = this.state.items
-      .filter(i => {
+      .filter((i) => {
         return (
           this.state.searchString === " " ||
           (i.Name !== null &&
@@ -117,10 +102,10 @@ class ItemList extends Component {
             ) >= 0)
         );
       })
-      .map(i => (
+      .map((i) => (
         <li
           key={i.ID}
-          onClick={e => {
+          onClick={(e) => {
             this.props.history.push("/itemdetail/" + i.ID);
           }}
         >
@@ -132,14 +117,14 @@ class ItemList extends Component {
       Category.Kitchen,
       Category.Medicine,
       Category.Bathroom,
-      Category.General
+      Category.General,
     ];
     let sortoptions = [
       "Sort by: ",
       "by Used high to low",
       "by Used low to high",
       "by ExpireDate far to close",
-      "by ExpireDate close to far"
+      "by ExpireDate close to far",
     ];
     let defaultCategory =
       this.state.showCategory === ""
@@ -165,9 +150,9 @@ class ItemList extends Component {
             <input
               placeholder="search by name, brand, flavor or category"
               className="my-input input-input "
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
-                  searchString: e.target.value
+                  searchString: e.target.value,
                 });
               }}
             />
@@ -175,10 +160,10 @@ class ItemList extends Component {
           <div className="item-searchbar-filter">
             <Dropdown
               options={sortoptions}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState(
                   {
-                    sortBy: e.value
+                    sortBy: e.value,
                   },
                   () => {
                     this.sortItems();
@@ -189,10 +174,10 @@ class ItemList extends Component {
             />
             <Dropdown
               options={categoryoptions}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState(
                   {
-                    showCategory: e.value
+                    showCategory: e.value,
                   },
                   () => {
                     this.filterItems();
@@ -223,14 +208,14 @@ const mapStateToProps = (state, ownProps) => {
     items: state.itemReducer.items,
     isLoading: state.itemReducer.isLoading,
     error: state.itemReducer.error,
-    userAuthenticated: state.authReducer.userAuthenticated
+    userAuthenticated: state.authReducer.userAuthenticated,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadItems: data => dispatch(actionCreators.loadItems(data)),
-    resetItems: data => dispatch(actionCreators.resetItems(data))
+    loadItems: (data) => dispatch(actionCreators.loadItems(data)),
+    resetItems: (data) => dispatch(actionCreators.resetItems(data)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
