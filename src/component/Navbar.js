@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MyButton from "./utility/MyButton.js";
 import { Link } from "react-router-dom";
 import "../styles/NavStyle.scss";
 import { connect } from "react-redux";
@@ -7,6 +6,14 @@ import * as actionCreators from "../actions/actionCreators";
 import { Auth } from "aws-amplify";
 import Dropdown from "react-dropdown";
 import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faListAlt } from "@fortawesome/free-regular-svg-icons";
+import { faChartBar } from "@fortawesome/free-regular-svg-icons";
+import { faMehRollingEyes } from "@fortawesome/free-regular-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { faCogs } from "@fortawesome/free-solid-svg-icons";
 
 class Navbar extends Component {
   constructor(props) {
@@ -41,29 +48,80 @@ class Navbar extends Component {
   }
 
   render() {
-    let dropdownOptions = ["Change password", "Log out"];
-
-    let dropdown =
-      this.props.userAuthenticated && this.props.cognitoUser != null ? (
-        <Dropdown
-          options={dropdownOptions}
-          placeholder={"Hello " + this.props.cognitoUser.attributes.name}
-          onChange={(value) => {
-            this.handleLogoutDropdown(value);
-          }}
-        />
-      ) : (
-        ""
-      );
+    let menuOptions = [
+      {
+        name: "Check my pantry",
+        iconName: faListAlt,
+      },
+      {
+        name: "Statistics",
+        iconName: faChartBar,
+      },
+      {
+        name: "Pantry Alert",
+        iconName: faBell,
+      },
+      {
+        name: "Shopping List",
+        iconName: faCheckCircle,
+      },
+      {
+        name: "Send bills",
+        iconName: faMehRollingEyes,
+      },
+      {
+        name: "Settings",
+        iconName: faCogs,
+      },
+    ];
+    let menuItem = menuOptions.map((item) => (
+      <button
+        className="dropdown-item"
+        id={item.name}
+        key={item.name}
+        onClick={(e) => {
+          console.log(e.target.id);
+        }}
+      >
+        <FontAwesomeIcon icon={item.iconName} size="1x" /> {item.name}
+      </button>
+    ));
     return (
       <div className="navBar my-navbar">
         <div className="d-flex mb-3 my-navbar">
-          <div className="mr-auto p-2 ">
+          <div className="mr-auto p-2 pc-nav">
             <Link to="/">
               <span>SCPantryGuru</span>
             </Link>
           </div>
-          <div className="p-2 nav-icons">
+          <div className="p-2 mobile-nav">
+            <Link to="/">
+              <FontAwesomeIcon icon={faHome} size="2x" />
+            </Link>
+          </div>
+
+          <div className="p-2 mobile-nav">
+            <div className="nav-item dropdown">
+              <button
+                className="btn dropdown-toggle icon-background"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Menu
+              </button>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                {menuItem}
+              </div>
+            </div>
+          </div>
+
+          <div className="p-2 nav-icons pc-nav">
             <Link to="/userpanel">
               <span className="nav-item-custom">User panel</span>
             </Link>

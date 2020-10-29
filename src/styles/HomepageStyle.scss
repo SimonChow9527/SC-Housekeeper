@@ -17,63 +17,8 @@
     font-size: 5vw !important; 
     color: $SAF_light_orange !important;
 }
-.homepage-wrapper .searchbar{
-    position: relative;
-    top:15%;
-    outline: 1px solid $grey3;
-}
 
-.feature-desc{
-    color: $grey3;
-    font-size: xx-large !important;
-    display: block;
-    margin-bottom: 48px;
-}
 
-.feature-table{
-    position: relative;
-    height: 75%;
-    width: 100%;
-    top:25%;
-}
-.feature-table a{
-    display: block;
-}
-.feature-table a:hover{
-    text-decoration: none;
-}
-.feature-link{
-    width: 150px;
-}
-
-.feature-table-features{
-    display: flex;
-    justify-content: space-around;
-}
-
-.feature-element{
-    border-style: solid;
-    border-color:$grey3 ;
-    width:150px;
-    color:$grey3;
-    margin: 0;
-  }
-  
-  .feature-element span{
-    display: block;
-  }
-  .feature-element-icon{
-    color:$SAF_loght_blue;
-  }
-  
-  
-  .feature-element:hover{
-    background-color:$yellow;
-    cursor: pointer;
-    border:none;
-    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    text-decoration: none;
-  }
 
   
 @media(max-width:768px){
@@ -83,32 +28,15 @@
     }
     .homepage-wrapper .desc{
         position: relative;
-        width: 90%;
-        margin: 0;
-        left: 5%;
-        
-    }
-    .feature-table{
-        position: relative;
-        top:20%;
-        height: 80%;
         width: 100%;
-    }
-    
-    .feature-table-features{
-        position: absolute;
-        display: flex;
+        height: calc(100% - 50px);
+        padding:5%;
+        margin: 0;
+        display:flex;
         flex-direction: column;
         align-items: center;
-        height: 80%;
-        width: 100%;    
+        justify-content: center;
+        top:50px !important;
     }
-
-    .feature-element{
-        margin: 5px;
-    }
-    .feature-table a{
-        position: relative;
-
-    }
+    
 }

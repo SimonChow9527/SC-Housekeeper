@@ -5,6 +5,7 @@ import { faChartBar } from "@fortawesome/free-regular-svg-icons";
 import { faMehRollingEyes } from "@fortawesome/free-regular-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { faCogs } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "../styles/NavStyle.scss";
 import "../styles/UserPanelStyle.scss";
@@ -12,7 +13,7 @@ import "../styles/UserPanelStyle.scss";
 class UserPanel extends Component {
   render() {
     return (
-      <div className="feature-table">
+      <div className="user-panel">
         <div className="sidebar">
           <nav className="nav flex-column">
             <div className="nav-link">
@@ -47,6 +48,13 @@ class UserPanel extends Component {
               <button>
                 <FontAwesomeIcon icon={faMehRollingEyes} size="3x" />
                 <span>Send bills</span>
+              </button>
+            </div>
+
+            <div className="nav-link">
+              <button>
+                <FontAwesomeIcon icon={faCogs} size="3x" />
+                <span>Settings</span>
               </button>
             </div>
           </nav>
