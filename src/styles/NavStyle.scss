@@ -10,6 +10,10 @@
     background-color: $SAF_black;
 }
 
+.my-navbar a{
+    color:$SAF_dark_orange !important;
+}
+
 .my-navbar span {
     color: $SAF_light_orange;
     height: 100%;
@@ -29,7 +33,7 @@
 .sidebar{
     position: fixed;
     top: 50px;
-    bottom: 0;
+    bottom: 24px;
     left: 0;
     padding: 0;
     width:200px;
@@ -38,11 +42,16 @@
  
 }
 
+.sidebar nav{
+    height: 100%;
+}
+
+
+
 .nav-link{
-    color:$SAF_loght_blue;
     background-color:$SAF_black;
     border: none;
-    height: 100px;
+    height: calc(100% / 6);
     width: 100%;
 }
 
@@ -51,7 +60,7 @@
 }
 
 .nav-link button {
-    color:$SAF_loght_blue;
+    color:$white;
     background-color:$SAF_black;
     border: none;
     box-shadow: none;
@@ -72,8 +81,42 @@
 }
 
 
+.mobile-nav{
+    display: none;;
+}
+
+.my-navbar .dropdown button{
+    color: $SAF_light_orange !important;
+    background-color: $SAF_black !important;
+}
+
+.my-navbar .dropdown-menu {
+    background-color: $SAF_black !important;
+}
+
 @media(max-width:768px){
  
-
+    .my-navbar{
+       display: flex;
+       justify-content: space-between;
+    }
     
+    .sidebar{
+        width: 100%;
+        bottom:0;
+    }
+
+    .nav-link{
+       
+        width: 45%;
+        justify-content: center;
+    }
+
+    .pc-nav{
+        display: none;
+    }
+    
+    .mobile-nav{
+        display: block !important;
+    }
 }
