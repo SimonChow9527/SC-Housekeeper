@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../styles/AuthenticatorStyle.scss";
-import MyButton from "./utility/MyButton.js";
 import * as actionCreators from "../actions/actionCreators";
 import { connect } from "react-redux";
 import { Auth } from "aws-amplify";
