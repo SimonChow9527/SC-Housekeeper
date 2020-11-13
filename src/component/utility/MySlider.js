@@ -11,7 +11,7 @@ class MySlider extends Component {
     super(props);
     this.state = {
       sliderValue: "",
-      firstTimeLoaded: true
+      firstTimeLoaded: true,
     };
 
     this.calColor = this.calColor.bind(this);
@@ -19,7 +19,7 @@ class MySlider extends Component {
   }
 
   percentFormatter(v) {
-    return `${v} %`;
+    return `${v}%`;
   }
 
   calColor(v) {
@@ -43,8 +43,9 @@ class MySlider extends Component {
   }
 
   render() {
-    let defaultvalue =
-      this.props.defaultValue !== null ? parseInt(this.props.defaultValue) : 0;
+    let defaultvalue = this.props.defaultValue
+      ? parseInt(this.props.defaultValue)
+      : 0;
     let color = this.state.firstTimeLoaded
       ? this.calColor(defaultvalue).toString()
       : this.calColor(this.state.sliderValue).toString();
@@ -52,13 +53,12 @@ class MySlider extends Component {
       <div className="slider-wrapper">
         <span className="slider-text">{this.props.name + " "}</span>
         <SliderWithTooltip
-          tipFormatter={value => this.percentFormatter(value)}
-          tipProps={{ overlayClassName: "foo" }}
+          tipFormatter={(value) => this.percentFormatter(value)}
           defaultValue={defaultvalue}
           trackStyle={{
-            backgroundColor: color
+            backgroundColor: color,
           }}
-          onChange={value => {
+          onChange={(value) => {
             this.setState({ sliderValue: value, firstTimeLoaded: false });
             this.props.onChange(value);
           }}
@@ -71,9 +71,9 @@ class MySlider extends Component {
 MySlider.propTypes = {
   name: PropTypes.string,
   // the start point of the slider
-  defaultValue: PropTypes.number,
+  defaultValue: PropTypes.string,
   //a function to handle value change
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default MySlider;

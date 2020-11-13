@@ -17,7 +17,7 @@ class Authenticator extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
+
     this.handleSignin = this.handleSignin.bind(this);
     this.banSubmitShowTip = this.banSubmitShowTip.bind(this);
     this.hideTip = this.hideTip.bind(this);
@@ -29,32 +29,7 @@ class Authenticator extends Component {
   }
 
   handleSubmit() {
-    if (this.state.isRegister) this.handleSignUp();
-    else this.handleSignin();
-  }
-
-  async handleSignUp() {
-    let username = this.state.userEmail;
-    let password = this.state.userPassword;
-    let email = this.state.userEmail;
-    try {
-      await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email: email,
-          name: username,
-        },
-      });
-    } catch (err) {
-      toast.error(err.message);
-      return;
-    }
-
-    toast.success("Welcome! you have successfully registered a new account");
-    toast.success(
-      "And don't forget to check your email to confirm your email address"
-    );
+    this.handleSignin();
   }
 
   async handleSignin() {

@@ -74,19 +74,21 @@
 
 .slider-wrapper{
   position: relative;
-  width: 90%;
+  width: 100%;
+  padding-left: 2%;
+  padding-right: 2%;
   float: left;
 }
 .slider-text{
   float: left;
   text-align: center;
-  width: 25%;
+  width: 15%;
 }
 
 .rc-slider{
   position: relative;
-  width: 70% !important;
-  left: 30%;
+  width: 80% !important;
+  left: 20%;
 }
 .rc-slider-rail{
   background-color: $grey !important;

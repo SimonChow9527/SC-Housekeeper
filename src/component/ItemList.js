@@ -13,16 +13,17 @@ class ItemList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: this.props.items,
+      items: this.props.itemList,
       searchString: "",
       showCategory: "",
       sortBy: "",
     };
-    this.sortItems = this.sortItems.bind(this);
+    /* this.sortItems = this.sortItems.bind(this);
     this.filterItems = this.filterItems.bind(this);
-    this.sorting = this.sorting.bind(this);
+    this.sorting = this.sorting.bind(this);*/
+    console.log(this.props);
   }
-
+  /*
   filterItems() {
     let value = this.state.showCategory;
     if (value === "Category: All") {
@@ -77,11 +78,11 @@ class ItemList extends Component {
       return -1;
     }
     return 0;
-  }
+  }*/
 
   render() {
     let listItem = this.state.items
-      .filter((i) => {
+      /* .filter((i) => {
         return (
           this.state.searchString === " " ||
           (i.Name !== null &&
@@ -101,102 +102,15 @@ class ItemList extends Component {
               this.state.searchString.toLowerCase()
             ) >= 0)
         );
-      })
+      })*/
       .map((i) => (
-        <li
-          key={i.ID}
-          onClick={(e) => {
-            this.props.history.push("/itemdetail/" + i.ID);
-          }}
-        >
-          {<ItemCard item={i} />}
+        <li key={i.itemID} onClick={() => {}}>
+          <ItemCard item={i} />
         </li>
       ));
-    let categoryoptions = [
-      "Category: All",
-      Category.Kitchen,
-      Category.Medicine,
-      Category.Bathroom,
-      Category.General,
-    ];
-    let sortoptions = [
-      "Sort by: ",
-      "by Used high to low",
-      "by Used low to high",
-      "by ExpireDate far to close",
-      "by ExpireDate close to far",
-    ];
-    let defaultCategory =
-      this.state.showCategory === ""
-        ? "Category: All"
-        : this.state.showCategory;
-    let defaultSort =
-      this.state.sortBy === "" ? "Sort by: " : this.state.sortBy;
-
-    return this.props.isLoading ? (
+    console.log(listItem.length);
+    return (
       <div className="item-list-wrapper">
-        <div className="my-spinner">
-          <SyncLoader
-            size={15}
-            color={"#17a2b8"}
-            loading={this.props.isLoading}
-          />
-        </div>
-      </div>
-    ) : (
-      <div className="item-list-wrapper">
-        <div className="item-searchbar">
-          <div className="item-searchbar-input">
-            <input
-              placeholder="search by name, brand, flavor or category"
-              className="my-input input-input "
-              onChange={(e) => {
-                this.setState({
-                  searchString: e.target.value,
-                });
-              }}
-            />
-          </div>
-          <div className="item-searchbar-filter">
-            <Dropdown
-              options={sortoptions}
-              onChange={(e) => {
-                this.setState(
-                  {
-                    sortBy: e.value,
-                  },
-                  () => {
-                    this.sortItems();
-                  }
-                );
-              }}
-              value={defaultSort}
-            />
-            <Dropdown
-              options={categoryoptions}
-              onChange={(e) => {
-                this.setState(
-                  {
-                    showCategory: e.value,
-                  },
-                  () => {
-                    this.filterItems();
-                  }
-                );
-              }}
-              value={defaultCategory}
-            />
-          </div>
-          <div className="item-searchbar-button">
-            <MyButton
-              text="Add item"
-              handleClick={() => {
-                this.props.history.push("/createitem");
-              }}
-              extraclassname="btn-custom-green"
-            />
-          </div>
-        </div>
         <ol className="item-list">{listItem}</ol>
       </div>
     );
