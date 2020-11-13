@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 import { API } from "aws-amplify";
 import { toast } from "react-toastify";
 import * as actionCreators from "../actions/actionCreators";
-
-const { uuid } = require("uuidv4");
+import { v4 as uuidv4 } from "uuid";
+import CreatableSelect from "react-select/creatable";
 
 class ItemCreator extends Component {
   constructor(props) {
@@ -19,52 +19,39 @@ class ItemCreator extends Component {
 
     this.state = {
       item: {
-        ID: uuid(),
-        Name: null,
-        Flavor: null,
-        Brand: null,
-        Category: Category.Default,
-        Usage: 0,
-        DailyUsage: 0,
-        StartDate: new Date().toLocaleDateString(),
-        ExpireDate: null,
+        id: uuidv4(),
+        name: null,
+        priceNumber: null,
+        priceUnit: null,
+        unit: null,
+        brand: null,
+        category: Category.Default,
+        percentUsed: 0,
+        expireDate: null,
         isFinished: false,
-        FinishDate: null,
-        Note: null
-      }
+        note: null,
+      },
     };
 
-    this.calculateDays = this.calculateDays.bind(this);
-    this.calculateExpireSlider = this.calculateExpireSlider.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleCategoryInputChange = this.handleCategoryInputChange.bind(this);
   }
 
-  calculateDays(currentdate, expiredate) {
-    let Difference_In_Time = expiredate.getTime() - currentdate.getTime();
-    let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-    return Math.round(Difference_In_Days);
-  }
-
-  calculateExpireSlider(startdate, expiredate) {
-    let startDate = new Date(startdate);
-    let expireDate = new Date(expiredate);
-    let currentDate = new Date();
-
-    let fromStartToExpire = this.calculateDays(startDate, expireDate);
-    let fromCurrentToExpire = this.calculateDays(currentDate, expireDate);
-
-    return Math.round(
-      ((fromStartToExpire - fromCurrentToExpire) / fromStartToExpire) * 100
-    );
-  }
+  handleCategoryChange = (newValue: any) => {
+    console.log(newValue);
+  };
+  handleCategoryInputChange = (inputValue: any, actionMeta: any) => {
+    console.log(inputValue);
+  };
 
   updateState(e, targetname) {
     let value = e.target.value;
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       item: {
         ...prevState.item,
-        [targetname]: value
-      }
+        [targetname]: value,
+      },
     }));
   }
 
@@ -74,57 +61,45 @@ class ItemCreator extends Component {
     if (this.state.item.Name === null) toast.error("Name is required");
     else {
       let item = {
-        ...this.state.item
+        ...this.state.item,
       };
       this.props.addItem(item);
       let myInit = {
         body: {
           userEmail: this.props.cognitoUser.attributes.email,
-          ...this.state.item
-        }
+          ...this.state.item,
+        },
       };
-      await API.put("itemapi", "/items", myInit).catch(err => toast.error(err));
+      await API.put("itemapi", "/items", myInit).catch((err) =>
+        toast.error(err)
+      );
 
       this.props.history.push("/itemlist");
     }
   }
 
   render() {
-    let date =
-      this.state.item.ExpireDate === null
-        ? ""
-        : " in " +
-          this.calculateDays(new Date(), new Date(this.state.item.ExpireDate)) +
-          " day(s)";
+    let cateOptions = [
+      { value: "kitchen", label: "kitchen" },
+      { value: "bathroom", label: "bathroom" },
+      { value: "DIY", label: "DIY" },
+    ];
+
     let usageSlider = (
       <MySlider
         name="Usage"
         defaultValue={this.state.item.Usage}
-        onChange={value =>
-          this.setState(prevState => ({
+        onChange={(value) =>
+          this.setState((prevState) => ({
             item: {
               ...prevState.item,
-              Usage: value
-            }
+              Usage: value,
+            },
           }))
         }
       />
     );
 
-    let expireDateSlider = (
-      <MySlider
-        name={"Expire" + date}
-        defaultValue={
-          this.state.item.ExpireDate === null
-            ? 0
-            : this.calculateExpireSlider(
-                this.state.item.StartDate,
-                this.state.item.ExpireDate
-              )
-        }
-        onChange={() => {}}
-      />
-    );
     let expireDate = (
       <div className="expireDate-wrapper">
         <label>Expire Date :</label>
@@ -134,82 +109,40 @@ class ItemCreator extends Component {
           name="ExpireDate"
           defaultValue={this.state.item.ExpireDate || ""}
           type="date"
-          onChange={e => this.updateState(e, "ExpireDate")}
+          onChange={(e) => this.updateState(e, "ExpireDate")}
         />
       </div>
     );
-    let itemName = (
-      <MyInput
-        name="Name"
-        id="itemName"
-        placeholder="Name (required)"
-        value={this.state.item.Name || ""}
-        onChange={e => this.updateState(e, "Name")}
-      />
-    );
-    let itemFavor = (
-      <MyInput
-        name="Flavor"
-        id="itemFlavor"
-        placeholder="N/A"
-        value={this.state.item.Flavor || ""}
-        onChange={e => this.updateState(e, "Flavor")}
-      />
-    );
-    let itemBrand = (
-      <MyInput
-        name="Brand"
-        inputID="itemBrand"
-        placeholder="N/A"
-        value={this.state.item.Brand || ""}
-        onChange={e => this.updateState(e, "Brand")}
-      />
-    );
-    let itemDailyUsage = (
-      <MyInput
-        name="Daily Usage (%)"
-        id="itemDailyUsage"
-        placeholder="N/A"
-        value={this.state.item.DailyUsage}
-        onChange={e => this.updateState(e, "DailyUsage")}
-      />
-    );
+    let itemName = <input className="my-input" placeholder="Name" />;
+    let itemBrand = <input className="my-input" placeholder="Brand" />;
+    let price = <input className="my-input" placeholder="Price" />;
+    let priceUnit = <input className="my-input" placeholder="Unit" />;
     let itemNote = (
       <MyInput
         name="Note"
         id="itemDailyUsage"
         placeholder="N/A"
         value={this.state.item.Note || ""}
-        onChange={e => this.updateState(e, "Note")}
+        onChange={(e) => this.updateState(e, "Note")}
       />
     );
 
     let category = (
       <div className="category-wrapper">
         <label>Category :</label>
-        <select
-          className="custom-select"
-          id="inputGroupSelect01"
-          defaultValue={
-            this.state.item.Category !== ""
-              ? this.state.item.Category
-              : Category.Default
-          }
-          onChange={e => this.updateState(e, "Category")}
-        >
-          <option value={Category.Default}>Choose...</option>
-          <option value={Category.Kitchen}>Kitchen</option>
-          <option value={Category.Medicine}>Medicine</option>
-          <option value={Category.Bathroom}>Bathroom</option>
-          <option value={Category.General}>General</option>
-        </select>
+        <CreatableSelect
+          isClearable
+          onChange={this.handleCategoryChange}
+          onInputChange={this.handleCategoryInputChange}
+          options={cateOptions}
+        />
       </div>
     );
     let saveBtn = (
       <MyButton
         text="Save"
         extraclassname="btn-custom-green"
-        handleClick={e => this.handleSubmit(e)}
+        handleClick={(e) => this.handleSubmit(e)}
       />
     );
     let deleteBtn = (
@@ -235,16 +168,17 @@ class ItemCreator extends Component {
         {cancelBtn}
         <div className="container">
           <div className="row">
-            <div className="col-4">{itemName}</div>
+            <div className="col-md-4 mb-3"> {itemBrand}</div>
+            <div className="col-md-4 mb-3">{itemName}</div>
+            <div className="col-md-2 mb-3">{price}</div>
+            <div className="col-md-2 mb-3">{priceUnit}</div>
+          </div>
+
+          <div className="row">
             <div className="col-8">{usageSlider}</div>
           </div>
           <div className="row">
-            <div className="col-4">{itemFavor}</div>
-            <div className="col-8">{expireDateSlider}</div>
-          </div>
-          <div className="row">
-            <div className="col-4">{itemBrand}</div>
-            <div className="col-4">{itemDailyUsage}</div>
+            <div className="col-4"></div>
             <div className="col-4">{expireDate}</div>
           </div>
           <div className="row">
@@ -263,15 +197,15 @@ class ItemCreator extends Component {
   }
 }
 
-const MapStateToProps = state => {
+const MapStateToProps = (state) => {
   return {
     cognitoUser: state.authReducer.cognitoUser,
-    items: state.itemReducer.items
+    items: state.itemReducer.items,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addItem: data => dispatch(actionCreators.addItem(data))
+    addItem: (data) => dispatch(actionCreators.addItem(data)),
   };
 };
 

@@ -36,12 +36,12 @@ class SCHousekeeper extends Component {
         <Router>
           <Navbar />
           <Switch>
-            <Route exact path="/itemdetail/:ID" component={ItemDetail} />
-            <Route exact path="/itemlist" component={ItemList} />
-            <Route exact path="/login" component={Authenticator} />
-            <Route exact path="/createitem" component={ItemCreator} />
-            <Route exact path="/userpanel" component={UserPanel} />
             <Route exact path="/" component={HomePage} />
+            <Route path="/itemdetail/:ID" component={ItemDetail} />
+            <Route path="/itemlist" component={ItemList} />
+            <Route path="/login" component={Authenticator} />
+            <Route path="/createitem" component={ItemCreator} />
+            <Route path="/userpanel" component={UserPanel} />
             <Route component={PageNotFound} />
           </Switch>
         </Router>

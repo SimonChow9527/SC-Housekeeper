@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 
 class HomePage extends Component {
   render() {
+    const contactLink = (
+      <a href="https://simonchow.dev" target="_blank" rel="noopener noreferrer">
+        me
+      </a>
+    );
     return (
       <div className="homepage-wrapper">
         <div className="desc">
@@ -12,7 +17,7 @@ class HomePage extends Component {
           <h2>A personal pantry management platform</h2>
           <br />
           <h6>
-            Contact me for a real account <br />
+            Contact {contactLink} for a real account <br />
             or <br />
             login as a guest and take a tour
           </h6>

@@ -7,80 +7,73 @@ class ItemCard extends Component {
     super(props);
 
     this.state = {
-      item: this.props.item
+      item: this.props.item,
     };
 
     this.calculateDays = this.calculateDays.bind(this);
-    this.calculateExpireSlider = this.calculateExpireSlider.bind(this);
   }
 
-  calculateDays(currentdate, expiredate) {
-    let Difference_In_Time = expiredate.getTime() - currentdate.getTime();
+  calculateDays(expiredate) {
+    let currentDate = new Date();
+    let expireDate = new Date(expiredate);
+    let Difference_In_Time = expireDate.getTime() - currentDate.getTime();
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
     return Math.round(Difference_In_Days);
   }
 
-  calculateExpireSlider(startdate, expiredate) {
-    let startDate = new Date(startdate);
-    let expireDate = new Date(expiredate);
-    let currentDate = new Date();
-
-    let fromStartToExpire = this.calculateDays(startDate, expireDate);
-    let fromCurrentToExpire = this.calculateDays(currentDate, expireDate);
-
-    return Math.round(
-      ((fromStartToExpire - fromCurrentToExpire) / fromStartToExpire) * 100
-    );
-  }
-
   render() {
+    let expireCalc = this.calculateDays(
+      this.state.item.itemExpireDate
+    ).toString();
     let usageSlider = (
       <MySlider
         name="Used"
-        defaultValue={this.state.item.Usage}
+        defaultValue={this.state.item.percentageUsed}
         onChange={() => {}}
       />
     );
 
-    let expireDateSlider = (
-      <MySlider
-        name={"Expire"}
-        defaultValue={
-          this.state.item.ExpireDate === ""
-            ? 0
-            : this.calculateExpireSlider(
-                this.state.item.StartDate,
-                this.state.item.ExpireDate
-              )
-        }
-        onChange={() => {}}
-      />
+    let expireDate = this.state.item.itemExpireDate ? (
+      expireCalc >= 0 ? (
+        <span>
+          Expire in {expireCalc} {expireCalc > 1 ? "days" : "day"}
+        </span>
+      ) : (
+        <span>Expired </span>
+      )
+    ) : (
+      <span> Expire N/A</span>
     );
-    let itemName = <span>{this.state.item.Name}</span>;
-    let itemFavor = <span>{this.state.item.Flavor}</span>;
-    let itemBrand = <span>{this.state.item.Brand}</span>;
-
-    let itemNote = <span>{this.state.item.Note}</span>;
-
-    let category = <span>Category: {this.state.item.Category}</span>;
+    let name = <span>{this.state.item.itemName}</span>;
+    let brand = <span>{this.state.item.itemBrand}</span>;
+    let note = <span>{this.state.item.note}</span>;
+    let category = <span>In {this.state.item.category}</span>;
+    let price = (
+      <span>
+        {this.state.item.itemPrice[0] + " " + this.state.item.itemPrice[1]}{" "}
+      </span>
+    );
 
     return (
       <div className="item-card-wrapper">
-        <div className="container">
-          <div className="row">
-            <div className="col-6">
-              {itemBrand} {itemFavor} {itemName}
-            </div>
-            <div className="col-6">{category}</div>
+        <div className="row">
+          <div className="col-6">
+            {brand} {name}
           </div>
-          <hr />
-          <div className="row">
-            <div className="col-6"> {usageSlider}</div>
-            <div className="col-6">{expireDateSlider}</div>
-          </div>
-          <div className="row">
-            <div className="col">{itemNote}</div>
-          </div>
+          <div className="col-6">{category}</div>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="col-6"> {price}</div>
+          <div className="col-6">{expireDate}</div>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="col-12"> {usageSlider}</div>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="col-12">{note}</div>
         </div>
       </div>
     );
