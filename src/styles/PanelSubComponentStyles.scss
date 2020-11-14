@@ -9,6 +9,10 @@
 
 .check-pantry{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     top:50px;
     height: 80%;
     width: calc(100% - 200px);
@@ -18,14 +22,11 @@
 
 @media(max-width:768px){
     .check-pantry{
-        top:50px;
-        height: 80%;
+        top:0 !important;
+        height: auto !important;
         width:100%;
         padding: 1%;
         left: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
     }
 
 }

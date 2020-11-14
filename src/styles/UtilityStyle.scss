@@ -43,6 +43,7 @@
 .my-input{
   display: block;
   width: 100%;
+  height: 36px;
   padding: .375rem .75rem;
   border: 1px solid #ced4da;
   border-radius: 1rem;
@@ -54,19 +55,7 @@
   border: 1px solid $SAF_light_orange;
 }
 
-//input with span
-.input-wrapper{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  margin: 0;
-}
 
-.input-input{
-  position: relative;
-  width: 100% !important;
-}
 
 
 
@@ -82,13 +71,13 @@
 .slider-text{
   float: left;
   text-align: center;
-  width: 15%;
+  width: 30%;
 }
 
 .rc-slider{
   position: relative;
-  width: 80% !important;
-  left: 20%;
+  width: 65% !important;
+  left: 30%;
 }
 .rc-slider-rail{
   background-color: $grey !important;

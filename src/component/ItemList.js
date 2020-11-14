@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import "../styles/ItemListStyle.scss";
 import ItemCard from "../component/ItemCard.js";
 import { connect } from "react-redux";
-import Dropdown from "react-dropdown";
-import { Category } from "../component/Constants.js";
-import MyButton from "../component/utility/MyButton.js";
 import { toast } from "react-toastify";
 import SyncLoader from "react-spinners/SyncLoader";
 import * as actionCreators from "../actions/actionCreators";
@@ -21,7 +18,6 @@ class ItemList extends Component {
     /* this.sortItems = this.sortItems.bind(this);
     this.filterItems = this.filterItems.bind(this);
     this.sorting = this.sorting.bind(this);*/
-    console.log(this.props);
   }
   /*
   filterItems() {
@@ -108,7 +104,6 @@ class ItemList extends Component {
           <ItemCard item={i} />
         </li>
       ));
-    console.log(listItem.length);
     return (
       <div className="item-list-wrapper">
         <ol className="item-list">{listItem}</ol>

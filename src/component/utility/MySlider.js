@@ -58,6 +58,7 @@ class MySlider extends Component {
           trackStyle={{
             backgroundColor: color,
           }}
+          disabled={this.props.disabled}
           onChange={(value) => {
             this.setState({ sliderValue: value, firstTimeLoaded: false });
             this.props.onChange(value);

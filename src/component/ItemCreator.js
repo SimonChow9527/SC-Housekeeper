@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "../styles/ItemDetailStyle.scss";
 import MySlider from "../component/utility/MySlider.js";
-import MyInput from "../component/utility/MyInput.js";
-import MyButton from "../component/utility/MyButton.js";
 import { Category } from "./Constants.js";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
@@ -84,115 +82,133 @@ class ItemCreator extends Component {
       { value: "bathroom", label: "bathroom" },
       { value: "DIY", label: "DIY" },
     ];
+    let brandOptions = [
+      { value: "Woolworth", label: "Woolworth" },
+      { value: "Coles", label: "Coles" },
+      { value: "Aldi", label: "Aldi" },
+    ];
+    let nameOptions = [
+      { value: "Corn Chip", label: "Corn Chip" },
+      { value: "Tim Tam", label: "Tim Tam" },
+      { value: "Diet Coke", label: "Diet Coke" },
+    ];
 
-    let usageSlider = (
-      <MySlider
-        name="Usage"
-        defaultValue={this.state.item.Usage}
-        onChange={(value) =>
-          this.setState((prevState) => ({
-            item: {
-              ...prevState.item,
-              Usage: value,
-            },
-          }))
-        }
-      />
-    );
-
-    let expireDate = (
-      <div className="expireDate-wrapper">
-        <label>Expire Date :</label>
-        <input
-          className="expireDate-picker"
-          id="expire-date-picker"
-          name="ExpireDate"
-          defaultValue={this.state.item.ExpireDate || ""}
-          type="date"
-          onChange={(e) => this.updateState(e, "ExpireDate")}
-        />
-      </div>
-    );
-    let itemName = <input className="my-input" placeholder="Name" />;
-    let itemBrand = <input className="my-input" placeholder="Brand" />;
-    let price = <input className="my-input" placeholder="Price" />;
-    let priceUnit = <input className="my-input" placeholder="Unit" />;
-    let itemNote = (
-      <MyInput
-        name="Note"
-        id="itemDailyUsage"
-        placeholder="N/A"
-        value={this.state.item.Note || ""}
-        onChange={(e) => this.updateState(e, "Note")}
-      />
-    );
-
-    let category = (
-      <div className="category-wrapper">
-        <label>Category :</label>
-        <CreatableSelect
-          isClearable
-          onChange={this.handleCategoryChange}
-          onInputChange={this.handleCategoryInputChange}
-          options={cateOptions}
-        />
-      </div>
-    );
-    let saveBtn = (
-      <MyButton
-        text="Save"
-        extraclassname="btn-custom-green"
-        handleClick={(e) => this.handleSubmit(e)}
-      />
-    );
-    let deleteBtn = (
-      <MyButton
-        text="Delete"
-        extraclassname="btn-custom-red"
-        handleClick={() => {
-          this.props.history.push("/");
-        }}
-      />
-    );
-    let cancelBtn = (
-      <MyButton
-        text="X"
-        extraclassname="btn-custom-red btn-cancel"
-        handleClick={() => {
-          this.props.history.goBack();
-        }}
-      />
-    );
     return (
-      <div className="item-detail-wrapper">
-        {cancelBtn}
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4 mb-3"> {itemBrand}</div>
-            <div className="col-md-4 mb-3">{itemName}</div>
-            <div className="col-md-2 mb-3">{price}</div>
-            <div className="col-md-2 mb-3">{priceUnit}</div>
+      <form className="item-detail-wrapper">
+        <button
+          className="my-button cancel-button"
+          type="button"
+          onClick={() => {
+            this.props.history.goBack();
+          }}
+        >
+          x
+        </button>
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label>Brand</label>
+            <CreatableSelect
+              isClearable
+              onChange={this.handleCategoryChange}
+              onInputChange={this.handleCategoryInputChange}
+              options={brandOptions}
+            />
           </div>
-
-          <div className="row">
-            <div className="col-8">{usageSlider}</div>
-          </div>
-          <div className="row">
-            <div className="col-4"></div>
-            <div className="col-4">{expireDate}</div>
-          </div>
-          <div className="row">
-            <div className="col-4">{category}</div>
-            <div className="col-8">{itemNote}</div>
-          </div>
-          <div className="row justify-content-end">
-            <div className="col-4">
-              {saveBtn}
-              {deleteBtn}
-            </div>
+          <div className="form-group col-md-6">
+            <label>Name</label>
+            <CreatableSelect
+              isClearable
+              onChange={this.handleCategoryChange}
+              onInputChange={this.handleCategoryInputChange}
+              options={nameOptions}
+            />
           </div>
         </div>
-      </div>
+        <div className="form-row">
+          <div className=" form-group col-md-6">
+            <label>Category</label>
+            <CreatableSelect
+              isClearable
+              onChange={this.handleCategoryChange}
+              onInputChange={this.handleCategoryInputChange}
+              options={cateOptions}
+            />
+          </div>
+          <div className="form-group col-md-3">
+            <label htmlFor="itemPriceInput">Price</label>
+            <input
+              type="text"
+              className="my-input"
+              id="itemPriceInput"
+              placeholder="Price"
+            />
+          </div>
+          <div className="form-group col-md-3">
+            <label htmlFor="itemPriceUnitInput">Unit</label>
+            <input
+              type="text"
+              className="my-input"
+              id="itemPriceUnitInput"
+              defaultValue="AUD"
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="usedSlider">Percent Used</label>
+            <MySlider
+              name="Used"
+              defaultValue={this.state.item.Usage}
+              id="usedSlider"
+              onChange={(value) => {
+                console.log(value);
+              }}
+            />
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="usedSlider">Expire Date</label>
+            <input
+              className="expireDate-picker"
+              id="expire-date-picker"
+              name="ExpireDate"
+              defaultValue={this.state.item.ExpireDate || ""}
+              type="date"
+              onChange={(e) => this.updateState(e, "ExpireDate")}
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-12">
+            <label htmlFor="itemNote">Note</label>
+            <input
+              name="Note"
+              className="my-input"
+              id="itemNote"
+              placeholder="N/A"
+              value={this.state.item.Note || ""}
+              onChange={(e) => {}}
+            />
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group col-md-6 justify-content-around">
+            <button type="button" className="my-button">
+              Mark as Finished
+            </button>{" "}
+            <button type="button" className="my-button">
+              Delete Item
+            </button>
+          </div>
+
+          <div className="form-group col-md-6">
+            <button type="button" className="my-button">
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </form>
     );
   }
 }
