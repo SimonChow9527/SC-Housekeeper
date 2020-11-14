@@ -28,6 +28,7 @@ class ItemCard extends Component {
     let usageSlider = (
       <MySlider
         name="Used"
+        disabled={true}
         defaultValue={this.state.item.percentageUsed}
         onChange={() => {}}
       />

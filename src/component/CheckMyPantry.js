@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../styles/PanelSubComponentStyles.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import ItemCard from "../component/ItemCard";
 import ItemCreator from "./ItemCreator";
 import ItemList from "./ItemList";
 
