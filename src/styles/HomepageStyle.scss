@@ -1,7 +1,5 @@
 @import './Colors.scss';
 .homepage-wrapper{
-    position: relative;
-    top:0;
     height: 100%;
     width: 100%;
     background-color: $SAF_green;
@@ -10,7 +8,7 @@
 .desc{
     position: relative;
     top:30%;
-    color: $SAF_loght_blue;
+    color: $SAF_light_blue;
 }
 
 .desc h1{
