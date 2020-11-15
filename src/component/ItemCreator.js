@@ -193,20 +193,82 @@ class ItemCreator extends Component {
           </div>
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6 justify-content-around">
-            <button type="button" className="my-button">
-              Mark as Finished
-            </button>{" "}
-            <button type="button" className="my-button">
-              Delete Item
-            </button>
-          </div>
-
-          <div className="form-group col-md-6">
-            <button type="button" className="my-button">
-              Save Changes
-            </button>
-          </div>
+          <ul className="option-ul">
+            <li>
+              <div>
+                <div className="text-deco">
+                  <strong>Add to Shopping list</strong>
+                </div>
+                <div className="text-deco">Add Item to shopping list</div>
+              </div>
+              <button type="button" className="btn btn-info">
+                Add to shopping list
+              </button>
+            </li>
+            <li>
+              <div>
+                <div className="text-deco">
+                  <strong>Add to bills</strong>
+                </div>
+                <div className="text-deco">
+                  Add Item to bills and later send bills to someone
+                </div>
+              </div>
+              <button type="button" className="btn btn-info">
+                Add to bills
+              </button>
+            </li>
+            <li>
+              <div>
+                <div className="text-deco">
+                  <strong>Set Alert</strong>
+                </div>
+                <div className="text-deco">
+                  Create custom alert for this item
+                </div>
+              </div>
+              <button type="button" className="btn btn-info">
+                Set Alert
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div className="form-row">
+          <ul className="option-ul">
+            <li>
+              <div>
+                <div className="text-deco">
+                  <strong>Save</strong>
+                </div>
+                <div className="text-deco">Create item or save changes</div>
+              </div>
+              <button type="button" className="btn btn-success">
+                Save
+              </button>
+            </li>
+            <li>
+              <div>
+                <div className="text-deco">
+                  <strong>Mark Item as finished</strong>
+                </div>
+                <div className="text-deco">Check that item later in stats</div>
+              </div>
+              <button type="button" className="btn btn-success">
+                Mark as Finished
+              </button>
+            </li>
+            <li>
+              <div>
+                <div className="text-deco">
+                  <strong>Delete</strong>
+                </div>
+                <div className="text-deco">This will delete item forever</div>
+              </div>
+              <button type="button" className="btn btn-danger">
+                Delete
+              </button>
+            </li>
+          </ul>
         </div>
       </form>
     );
