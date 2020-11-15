@@ -15,8 +15,8 @@ Visit [here](https://pantryguru.simonchow.dev/)
 
 This is a personal project that aims to provide convenience to its user (basically just me).
 
-Keep an eye on your inventory could be tedious, especially if you love to stock up on things. 
-PantryGuru is designed to solve this problem and provide an enjoyable experience. 
+Keep an eye on your inventory could be tedious, especially if you can't resist a sale and love to stock up on things. 
+PantryGuru is designed to solve this problem and make managing your inventory enjoyable, so you can keep stocking up. 
 
 
 ## Teck Stack
