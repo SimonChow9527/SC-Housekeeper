@@ -15,6 +15,7 @@ class HomePage extends Component {
           <h1> Pantry Guru</h1>
           <br />
           <h2>A personal pantry management platform</h2>
+          <h2>(Under Refactoring now)</h2>
           <br />
           <h6>
             Contact {contactLink} for a real account <br />
